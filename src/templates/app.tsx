@@ -1,4 +1,3 @@
-import './app.css'
 import { Router, Route, LocationProvider, ErrorBoundary, lazy } from 'preact-iso'
 
 import Home from '../routes/home'

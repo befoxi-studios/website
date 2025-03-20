@@ -1,5 +1,5 @@
 import { Component } from 'preact'
-import Post from '../components/post'
+import Post from '../components/Post'
 import { useLocation, type LocationHook } from 'preact-iso'
 
 export default class Home extends Component {
