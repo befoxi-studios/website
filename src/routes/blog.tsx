@@ -1,15 +1,8 @@
 import { Component } from 'preact'
-import Post from '../components/Post'
-import { useLocation, type LocationHook } from 'preact-iso'
+import Blog from '../templates/blog'
 
 export default class Home extends Component {
-  private location: LocationHook | undefined
-
   render() {
-    this.location = useLocation()
-
-    return (
-      <Post uri={this.location.path} />
-    )
+    return (<Blog />)
   }
 }

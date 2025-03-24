@@ -1,4 +1,4 @@
-export const SectionWrapper = ({ className, children }: React.HTMLAttributes<HTMLElement>) => {
+const SectionWrapper = ({ className = '', children }: React.HTMLAttributes<HTMLElement>) => {
   return (
     <div class={`w-full h-full ${className}`}>
       <div class='absolute inset-0 m-auto max-w-3xl'>
@@ -7,3 +7,5 @@ export const SectionWrapper = ({ className, children }: React.HTMLAttributes<HTM
     </div>
   )
 }
+
+export default SectionWrapper

@@ -1,65 +1,78 @@
 // @ts-ignore | JSXInternal: For external use
 import type { ComponentChildren, ComponentChild, VNode, JSXInternal } from 'preact'
+import { cn } from '../utils/cn'
 import { useScroll } from '../utils/scroll-hook'
+import { ScrollViewProps } from '../types/scroll-view'
+import ViewByNumberOfChildren from './ViewByNumberOfChildren'
+import { useEffect, useState } from 'preact/hooks'
 
-type DefineClassProps = {
-  children: ComponentChildren
-  className: string
-  /** @deprecated */
-  style: JSXInternal.Signalish<string | JSXInternal.CSSProperties | undefined>
-}
+const ScrollView = ({ max = 100, page = 5, indicator, onScrollChange, children }: ScrollViewProps) => {
+  const { progress, current, touch, to } = useScroll(max, page)
 
-interface DefineClass extends VNode {
-  props: DefineClassProps
-}
-
-interface ViewByNumberOfChildrenProps extends DefineClassProps {
-  index: number
-}
-
-interface ScrollViewProps extends React.HTMLAttributes<HTMLElement> {
-  max?: number
-  level?: number
-  indicator?: (elevator: boolean[]) => React.HTMLAttributes<HTMLElement>
-  onScrollChange?: (progress: number) => void
-}
-
-const ViewByNumberOfChildren = ({ index, children }: ViewByNumberOfChildrenProps) => {
-  const child = children as ComponentChild[]
-  child.map((elem, _childIndex) => {
-    const newElem = (elem as DefineClass)
-    // const oldClassName = newElem.props.className
-    // if (childIndex === index) {
-    //   newElem.props.className = `${oldClassName} ${className!}`
-    //   newElem.props.style = { ...newElem.props.style, ...style! }
-    // }
-    return newElem
-  })
-  return child.length > 0 ? child[index] : child
-}
-
-export const ScrollView = ({ max = 100, level = 5, indicator, onScrollChange, children }: ScrollViewProps) => {
-  const { progress, current } = useScroll(max, level)
+  const reactDistance = 75
+  const [reactStart, setReactStart] = useState(0)
+  const [reactDirection, setReactDirection] = useState(0)
 
   if (onScrollChange) {
     onScrollChange(progress)
   }
 
+  const dragReaction = (index: number, react: number = 10) => {
+    let value
+
+    if (current < index) {
+      value = 100
+    } else if (current > index) {
+      value = -100
+    } else if (current === 0 && reactDirection > 0) {
+      value = reactDirection * -react
+    } else if (current === (page - 1)) {
+      value = reactDirection < 0 ? (reactDirection * -react) : 0
+    } else if ((current !== 0 || current === (page - 1))) {
+      value = reactDirection * -react
+    } else {
+      value = 0
+    }
+    
+    return value
+  }
+  
+  useEffect(() => {
+    if (touch.distance > reactDistance || touch.distance < -reactDistance) {
+      setReactStart(touch.distance)
+      setReactDirection(touch.distance > 0 ? 1 : -1)
+    } else {
+      setReactStart(0)
+      setReactDirection(0)
+    }
+    if (touch.distance === 0 && (reactStart > 50 || reactStart < -50)) {
+      setReactStart(0)
+      setReactDirection(0)
+      to(current + (reactStart > 0 ? 1 : -1))
+    }
+  }, [touch, setReactStart])
+
   return (<>
     {indicator && (
-      indicator(Array(level)
-        .fill(false)
-        .map((_, i) => i === current))
+      indicator({
+        elevator: Array(page).fill(false).map((_, i) => i === current),
+        scrollTo: (index) => to(index),
+      })
     )}
-    {Array(level).fill(0).map((_, i) => (
+    {Array(page).fill(0).map((_, i) => (
       <section
-        className='col-start-1 row-start-2 last:row-end-4 flex items-center justify-center transition-all duration-500'
-        style={{ transform: `translateY(${current < i ? 100 : current > i ? -100 : 0}dvh)` }}
+        className={cn`
+          col-start-1 row-start-2 last:row-end-4
+          flex items-center justify-center transition-all duration-500
+        `}
+        style={{ transform: `translateY(${dragReaction(i, 7)}dvh)` }}
       >
-        <ViewByNumberOfChildren index={i} className='' style=''>
+        <ViewByNumberOfChildren index={i}>
           {children}
         </ViewByNumberOfChildren>
       </section>
     ))}
   </>)
 }
+
+export default ScrollView

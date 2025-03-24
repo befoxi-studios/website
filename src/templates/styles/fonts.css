@@ -1,0 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Bytesized&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --font-noto-sans: "Noto Sans", sans-serif;
+  --font-bytesized: "Bytesized", sans-serif;
+}
