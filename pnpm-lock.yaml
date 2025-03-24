@@ -81,6 +81,9 @@ importers:
       vite-plugin-toml:
         specifier: ^0.7.0
         version: 0.7.0(rollup@4.36.0)
+      wrangler:
+        specifier: ^4.4.0
+        version: 4.4.0
 
 packages:
 
