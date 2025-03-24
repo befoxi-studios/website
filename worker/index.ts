@@ -1,4 +1,5 @@
-// @ts-nocheck
-addEventListener('fetch', async (event) => {
-  event.respondWith(new Response('', { headers: { 'x-skip-request': '' }}))
-})
+export default {
+  fetch() {
+    return new Response(`Running in ${navigator.userAgent}!`)
+  },
+}

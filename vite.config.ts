@@ -9,7 +9,7 @@ import remarkFrontmatter from 'remark-frontmatter'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import remarkGfm from 'remark-gfm'
 import remarkMdx from 'remark-mdx'
-import vpc from 'vite-plugin-cloudflare'
+import { cloudflare } from '@cloudflare/vite-plugin'
 
 const mdxOptions: MDXOptions = {
   rehypePlugins: [
@@ -30,7 +30,7 @@ export default defineConfig({
     tailwindcss(),
     mdx(mdxOptions),
     ViteToml(),
-    vpc({ scriptPath: './worker/index.ts' }),
+    cloudflare(),
   ],
   resolve: {
     alias: {

@@ -16,6 +16,7 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^0.1.15",
     "@mdx-js/preact": "^3.1.0",
     "@mdx-js/rollup": "^3.1.0",
     "@preact/preset-vite": "^2.10.1",
@@ -33,7 +34,6 @@
     "tailwindcss": "^4.0.14",
     "typescript": "~5.7.2",
     "vite": "^6.2.0",
-    "vite-plugin-cloudflare": "^0.4.1",
     "vite-plugin-toml": "^0.7.0"
   }
 }
