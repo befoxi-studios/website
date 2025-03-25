@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'preact/hooks'
+import { useStore } from './global-hook'
 
 /**
  * A scroll function like this
@@ -6,6 +7,8 @@ import { useEffect, useState } from 'preact/hooks'
  * @param level Specifies the number of scrollable times
  */
 export const useScroll = (max: number = 100, level: number = 5) => {
+  const { isSearchOpen } = useStore()
+  
   const scrollLevel = level - 1
 
   const [scrollProgress, setScrollProgress] = useState(0)
@@ -22,6 +25,8 @@ export const useScroll = (max: number = 100, level: number = 5) => {
   }
 
   const handleScroll = (event: WheelEvent) => {
+    if (isSearchOpen) return
+
     const isCombo = event.ctrlKey || event.shiftKey || event.altKey || event.metaKey
 
     if (!isCombo) {
@@ -74,7 +79,7 @@ export const useScroll = (max: number = 100, level: number = 5) => {
   useEffect(() => {
     window.addEventListener('wheel', handleScroll)
     return () => window.removeEventListener('wheel', handleScroll)
-  }, [])
+  }, [isSearchOpen])
 
   useEffect(() => {
     document.addEventListener("touchstart", handleTouchStart)

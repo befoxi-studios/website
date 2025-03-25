@@ -81,7 +81,7 @@ const PostHead = ({ meta, delay, className }: PostHeadProps) => {
         </div>
         {meta.variables.preview && !previewError && (
           <div
-            class='p-3 flex items-start justify-center w-min h-full'
+            class='hidden sm:flex items-start justify-center p-3 w-min h-full'
             style={{ minWidth: meta.variables.description ? '208px' : '139px' }}
           >
             <img

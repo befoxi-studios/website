@@ -12,7 +12,7 @@ const Logo = () => {
         class='cursor-pointer select-none'
         onClick={() => location.route('/')}
       >
-        <span class='text-[#ffffffd7] text-xl font-semibold'>Befoxi Studios</span>
+        <span class='text-[#ffffffd7] text-xl font-semibold truncate'>Befoxi Studios</span>
       </button>
     </div>
   )
@@ -20,7 +20,7 @@ const Logo = () => {
 
 const Items = () => {
   return (
-    <div class='flex items-center justify-end gap-6 text-neutral-50/50'>
+    <div class='hidden md:flex items-center justify-end gap-6 text-neutral-50/50'>
       <a href='/roadmap' class='hover:text-neutral-50/75 transition-colors duration-150'>Roadmap</a>
       <a href='/blog' class='hover:text-neutral-50/75 transition-colors duration-150'>Blog</a>
       <a target='_blank'
@@ -38,7 +38,7 @@ const Items = () => {
 
 const Header = ({ menu = ['logo'] }: { menu?: ('logo' | 'search' | 'items')[] }) => {
   return (<>
-    <header class='grid grid-cols-3 items-center justify-between mx-4 backdrop-blur-lg z-10'>
+    <header class='flex md:grid grid-cols-3 items-center justify-between px-4 backdrop-blur-lg z-10'>
       {menu.includes('logo') ? (<Logo />) : <div class='pointer-events-none'></div>}
       {menu.includes('search') ? (<SearchBar />) : <div class='pointer-events-none'></div>}
       {menu.includes('items') && (<Items />)}

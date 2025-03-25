@@ -1,4 +1,4 @@
-const getNameByPath = (path: string, patterns: string[]) => {
+const getNameByPath = (path: string, patterns: string[]): string | undefined => {
   let name = undefined
   patterns.forEach((str) => {
     const patternRegex = new RegExp(str)

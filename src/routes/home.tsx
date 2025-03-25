@@ -2,7 +2,7 @@ import { Component } from 'preact'
 import { useState } from 'preact/hooks'
 import Header from '../templates/header'
 import Loading from '../components/Loading'
-import Main from '../templates/main'
+import Main from '../templates/home'
 import Background from '../templates/background'
 
 export default class Home extends Component {

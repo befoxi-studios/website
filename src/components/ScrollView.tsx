@@ -1,12 +1,14 @@
 // @ts-ignore | JSXInternal: For external use
 import type { ComponentChildren, ComponentChild, VNode, JSXInternal } from 'preact'
+import { useEffect, useState } from 'preact/hooks'
 import { cn } from '../utils/cn'
-import { useScroll } from '../utils/scroll-hook'
+import { useStore } from '../utils/hooks/global-hook'
+import { useScroll } from '../utils/hooks/scroll-hook'
 import { ScrollViewProps } from '../types/scroll-view'
 import ViewByNumberOfChildren from './ViewByNumberOfChildren'
-import { useEffect, useState } from 'preact/hooks'
 
 const ScrollView = ({ max = 100, page = 5, indicator, onScrollChange, children }: ScrollViewProps) => {
+  const { isSearchOpen } = useStore()
   const { progress, current, touch, to } = useScroll(max, page)
 
   const reactDistance = 75
@@ -38,6 +40,8 @@ const ScrollView = ({ max = 100, page = 5, indicator, onScrollChange, children }
   }
   
   useEffect(() => {
+    if (isSearchOpen) return
+    
     if (touch.distance > reactDistance || touch.distance < -reactDistance) {
       setReactStart(touch.distance)
       setReactDirection(touch.distance > 0 ? 1 : -1)
@@ -62,8 +66,8 @@ const ScrollView = ({ max = 100, page = 5, indicator, onScrollChange, children }
     {Array(page).fill(0).map((_, i) => (
       <section
         className={cn`
-          col-start-1 row-start-2 last:row-end-4
-          flex items-center justify-center transition-all duration-500
+          col-start-1 row-start-2 last:row-end-4 flex items-center justify-center
+          h-[calc(100dvh-(60px*2))] last:h-[calc(100dvh-60px)] transition-[transform] duration-500
         `}
         style={{ transform: `translateY(${dragReaction(i, 7)}dvh)` }}
       >

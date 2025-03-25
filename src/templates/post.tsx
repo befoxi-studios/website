@@ -40,8 +40,8 @@ const Post = ({ components, uri, onError }: PostProps) => {
   return (mdxContent && metadataVariable ? (
     <PostBody>
       <MDXProvider components={components}>
-        <div className='relative md overflow-auto'>
-          <div class='sticky top-0 flex flex-col gap-0.5 px-4 backdrop-blur-xl backdrop-brightness-95'>
+        <div className='relative md'>
+          <div class='flex flex-col gap-0.5 px-4 backdrop-blur-xl backdrop-brightness-95'>
             <div class='flex flex-row items-center gap-2 pt-3 pb-2 text-xs font-thin'>
               <div class={cn`
                 flex flex-row items-center gap-1 px-1 w-fit bg-neutral-100/8
@@ -55,7 +55,7 @@ const Post = ({ components, uri, onError }: PostProps) => {
             </div>
             <span class='text-2xl mb-8'>{metadataVariable.title}</span>
           </div>
-          <div class='px-4 max-h-[calc(100vh-15rem)] font-sans font-light'>
+          <div class='px-4 font-sans font-light'>
             {mdxContent}
           </div>
         </div>
