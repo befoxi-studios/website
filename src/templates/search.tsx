@@ -7,7 +7,7 @@ import { useStore } from '../utils/hooks/global-hook'
 import { useSearch } from '../utils/hooks/search-hook'
 import getNameByPath from '../utils/get-name-by-path'
 import type { SearchResult } from '../types/search'
-import { custom as searchCustom, props as searchProps } from './search/index'
+import { custom as searchCustom, props as searchProps } from '../functions/search/index'
 
 const handleSearchItem = (result: SearchResult, key: string, params: { [key: string]: any }) => {
   const prop = searchProps[result.type]
@@ -45,7 +45,7 @@ const searchIndex = (result: SearchResult | undefined, clientProvide: { [key: st
             </span>
           </div>
           <span
-            class='text-xl sm:text-base'
+            class='text-lg sm:text-base'
             style={result.type.startsWith('@') ? {
               color: 'var(--color-neutral-400)',
             } : {
@@ -200,15 +200,15 @@ export const SearchWindow = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
-          class='absolute inset-0 flex items-center justify-center bg-black/45 backdrop-blur-xs z-150'
+          class='absolute inset-0 flex items-center justify-center p-2 sm:p-8 bg-black/45 backdrop-blur-xs z-150'
         >
           <div
             class='absolute inset-0'
             onClick={() => changeSearchState(false)}
           ></div>
           <div class={cn`
-            flex flex-col-reverse sm:flex-col m-0 sm:m-8 w-full max-w-full sm:max-w-md h-dvh sm:h-auto bg-black
-            border border-transparent sm:border-neutral-200/15 rounded-none sm:rounded-md z-1 transition-opacity
+            flex flex-col sm:flex-col w-full max-w-full sm:max-w-md h-full sm:h-auto bg-black
+            border border-neutral-200/15 rounded-md z-1 transition-opacity
           `}>
             <div class='flex flex-row'>
               <div class='flex flex-row items-center gap-2 px-2 py-1 m-1 w-full text-neutral-50/45'>
