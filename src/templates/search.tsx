@@ -45,7 +45,7 @@ const searchIndex = (result: SearchResult | undefined, clientProvide: { [key: st
             </span>
           </div>
           <span
-            class='text-xl sm:base'
+            class='text-xl sm:text-base'
             style={result.type.startsWith('@') ? {
               color: 'var(--color-neutral-400)',
             } : {
