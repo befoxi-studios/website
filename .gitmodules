@@ -1,3 +1,6 @@
 [submodule "src/submodules/blog"]
 	path = src/submodules/blog
 	url = https://github.com/befoxi-studios/blog.git
+[submodule "src/submodules/functions"]
+	path = src/submodules/functions
+	url = https://github.com/befoxi-studios/functions.git

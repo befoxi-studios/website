@@ -1,3 +1,0 @@
-type: '@search'
-name: '@search-blog'
-rules: ['@blog', '@search:blog']

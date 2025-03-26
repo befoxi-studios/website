@@ -1,3 +1,0 @@
-type: '@search'
-name: '@search-page'
-rules: ['@page', '@search:page', '@route', '@search:route']
