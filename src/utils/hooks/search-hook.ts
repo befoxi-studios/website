@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks'
 import { isAll, isInclude, isStartsWith } from '../is'
-import { SearchResult } from '../../types/search'
+import { SearchResult } from '../../submodules/functions/search/set/type'
 
 const routeFiles = import.meta.glob(`../../routes/**/!(_*)*.{js,jsx,ts,tsx}`, { eager: true })
 const blogFiles = import.meta.glob(`../../submodules/blog/*/index.{md,mdx}`, { eager: true })
