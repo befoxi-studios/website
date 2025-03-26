@@ -6,7 +6,7 @@ import { cn } from '../utils/cn'
 import { useStore } from '../utils/hooks/global-hook'
 import { useSearch } from '../utils/hooks/search-hook'
 import getNameByPath from '../utils/get-name-by-path'
-import type { SearchResult } from '../submodules/functions/search/set/type'
+import type { SearchResult } from '../submodules/functions/search/set/types'
 import searchCustom from '../submodules/functions/search/set/custom'
 import searchProps from '../submodules/functions/search/set/props'
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'preact/hooks'
 import { cn } from '../utils/cn'
-import type { RoadmapItem } from '../submodules/functions/roadmap/set/type'
+import type { RoadmapItem } from '../submodules/functions/roadmap/set/types'
 import roadmapItems from '../submodules/functions/roadmap/set/items'
 
 const Roadmap = () => {
