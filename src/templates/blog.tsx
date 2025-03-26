@@ -28,8 +28,10 @@ const Blog = ({ children }: React.HTMLAttributes<HTMLElement>) => {
     })
 
     if (location.path !== '/blog' && !filteredMetadata.length) {
+      document.title = 'Page not found - Befoxi Studios'
       setIsError(true)
     } else {
+      document.title = 'Befoxi Studios Blog'
       setIsError(false)
     }
 

@@ -38,13 +38,10 @@ const Post = ({ components, uri, onError }: PostProps) => {
   }, [])
 
   useEffect(() => {
-    console.log(uri, mdxContent, metadataVariable, alternateComponent)
     if (metadataVariable && metadataVariable.name) {
-      document.title = `${metadataVariable.name} - Blog - Befoxi Studios`
-    } else {
-      document.title = 'Blog - Befoxi Studios'
+      document.title = `${metadataVariable.name} - Befoxi Studios Blog`
     }
-  }, [uri, mdxContent, metadataVariable, alternateComponent])
+  }, [uri, metadataVariable])
 
   return (mdxContent && metadataVariable ? (
     <PostBody>

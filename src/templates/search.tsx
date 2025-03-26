@@ -7,8 +7,8 @@ import { useStore } from '../utils/hooks/global-hook'
 import { useSearch } from '../utils/hooks/search-hook'
 import getNameByPath from '../utils/get-name-by-path'
 import type { SearchResult } from '../types/search'
-import { custom as searchCustom } from '../functions/search/custom'
-import { props as searchProps } from '../functions/search/props'
+import searchCustom from '../functions/search/set/custom'
+import searchProps from '../functions/search/set/props'
 
 type anyParams = { [key: string]: any }
 
