@@ -1,7 +1,7 @@
 import isMobile from 'is-mobile'
-import { SearchIndexProps } from '../../types/search'
+import { SearchIndexProps } from '../../../types/search'
 
-export const props: SearchIndexProps = {
+const props: SearchIndexProps = {
   'hidden': {
     pattern: '^#(.+)',
     callback(value) {
@@ -43,3 +43,5 @@ export const props: SearchIndexProps = {
     },
   },
 }
+
+export default props
