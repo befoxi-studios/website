@@ -25,6 +25,7 @@ const mdxOptions: MDXOptions = {
 }
 
 export default defineConfig({
+  base: '/',
   plugins: [
     preact(),
     tailwindcss(),

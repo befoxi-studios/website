@@ -7,28 +7,33 @@ import { useStore } from '../utils/hooks/global-hook'
 import { useSearch } from '../utils/hooks/search-hook'
 import getNameByPath from '../utils/get-name-by-path'
 import type { SearchResult } from '../types/search'
-import { custom as searchCustom, props as searchProps } from '../functions/search/index'
+import { custom as searchCustom } from '../functions/search/custom'
+import { props as searchProps } from '../functions/search/props'
 
-const handleSearchItem = (result: SearchResult, key: string, params: { [key: string]: any }) => {
+type anyParams = { [key: string]: any }
+
+const handleSearchItem = (result: SearchResult, key: string, params: anyParams) => {
   const prop = searchProps[result.type]
   if (prop) {
     prop.callback(key, params)
   }
 }
 
-const searchIndex = (result: SearchResult | undefined, clientProvide: { [key: string]: any }): React.ReactElement => {
+const searchIndex = (result: SearchResult | undefined, clientProvide: anyParams): React.ReactElement => {
   if (!result) return <></>
 
   const id = result.path || result.name
   if (!id) return <></>
 
   const location = useLocation()
+  const userProvide: anyParams = { location, ...clientProvide }
   const props = Object.values(searchProps)
   const patterns = props.map(t => t.pattern) as string[]
   const key: string | undefined = getNameByPath(id, patterns)
-  const userProvide = { location, ...clientProvide }
 
-  if (key) {
+  const isHidden = result.rules.filter(t => String(userProvide.value) === t)[0] || result.type !== 'hidden'
+
+  if (key && isHidden) {
     return (
       <div
         class={cn`
@@ -37,15 +42,18 @@ const searchIndex = (result: SearchResult | undefined, clientProvide: { [key: st
         `}
         onClick={() => handleSearchItem(result, key, userProvide)}
       >
-        <div class='flex flex-row items-center gap-2'>
-          <div class='flex items-center justify-center px-1 bg-neutral-700/45 text-neutral-400 rounded-sm'>
+        <div class='flex flex-row items-start gap-2'>
+          <div class={cn`
+            flex items-center justify-center px-1 py-0.5 my-auto mt-0.6
+            bg-neutral-700/45 text-neutral-400 rounded-sm
+          `}>
             <span class='text-base sm:text-xs text-light lowercase'>
               {result.type.startsWith('@') ? '@' : result.type}
               <i class='hidden'>:</i>
             </span>
           </div>
           <span
-            class='text-lg sm:text-base'
+            class='text-base sm:text-sm'
             style={result.type.startsWith('@') ? {
               color: 'var(--color-neutral-400)',
             } : {
@@ -155,11 +163,12 @@ export const SearchWindow = () => {
 
   const indexingSearchResults = (res: SearchResult | undefined) => {
     return searchIndex(res, {
+      value: inputRef.current?.value,
       search: (value: string) => {
         if (inputRef.current) {
           setVariableInputValue(value)
         }
-      }
+      },
     })
   }
 
@@ -223,11 +232,14 @@ export const SearchWindow = () => {
               <button
                 class={cn`
                   group/search-close relative flex items-center justify-center px-2
-                  border-l border-l-neutral-200/15 cursor-pointer
+                  focus-within:[&>div]:bg-neutral-200/8 border-l border-l-neutral-200/15 outline-0 cursor-pointer
                 `}
                 onClick={() => changeSearchState(false)}
               >
-                <div class='absolute inset-0 m-1 group-hover/search-close:bg-neutral-200/8 rounded-sm pointer-events-none'></div>
+                <div class={cn`
+                  absolute inset-0 m-1 group-hover/search-close:bg-neutral-200/8
+                  rounded-sm pointer-events-none
+                `}></div>
                 <XIcon width={21} height={21} strokeWidth={0.75} />
               </button>
             </div>

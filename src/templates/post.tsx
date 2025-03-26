@@ -37,6 +37,15 @@ const Post = ({ components, uri, onError }: PostProps) => {
     return () => clearInterval(id)
   }, [])
 
+  useEffect(() => {
+    console.log(uri, mdxContent, metadataVariable, alternateComponent)
+    if (metadataVariable && metadataVariable.name) {
+      document.title = `${metadataVariable.name} - Blog - Befoxi Studios`
+    } else {
+      document.title = 'Blog - Befoxi Studios'
+    }
+  }, [uri, mdxContent, metadataVariable, alternateComponent])
+
   return (mdxContent && metadataVariable ? (
     <PostBody>
       <MDXProvider components={components}>

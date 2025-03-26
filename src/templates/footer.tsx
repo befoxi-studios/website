@@ -6,7 +6,7 @@ const Footer = ({ className }: React.HTMLAttributes<HTMLElement>) => {
       <div class='flex flex-row md:grid grid-cols-2 justify-between mt-4 md:mt-16'>
         <div class='flex flex-col gap-5 mr-12'>
           <h1 class='text-on-background text-xl font-semibold'>Befoxi Studios</h1>
-          <span class='max-w-3xs text-sm font-light'>Isn't just a place to make games, it's a place to grow with players.</span>
+          <span class='max-w-3xs text-sm font-light'>Isn't just a place to <b>make games</b>, it's a place to grow with <b>users</b>.</span>
         </div>
         <div class='hidden md:flex flex-col mr-8 last:mr-auto'>
           <h1 class='mb-5 text-on-background text-xl font-semibold'>General</h1>

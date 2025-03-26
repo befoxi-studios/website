@@ -1,8 +1,27 @@
+import isMobile from 'is-mobile'
 import { SearchIndexProps } from '../../types/search'
 
 export const props: SearchIndexProps = {
+  'hidden': {
+    pattern: '^#(.+)',
+    callback(value) {
+      // console.log(value)
+
+      // From below, it only works if not in a mobile.
+      if (isMobile()) return
+      
+      if (value === 'open-post') {
+        if (window) {
+          const githubClient = 'x-github-client'
+          const path = '/openRepo'
+          const blogRepo = 'https://github.com/befoxi-studios/blog.git'
+          window.open(`${githubClient}:/${path}/${blogRepo}`)
+        }
+      }
+    },
+  },
   '@search': {
-    pattern: '^@search\-(.+)',
+    pattern: '^@search-(.+)',
     callback(value, { search }) {
       search(`${value}:`)
     },

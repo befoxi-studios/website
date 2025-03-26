@@ -33,6 +33,7 @@ export function App() {
           <Route path='/roadmap' component={Roadmap} />
           <Route path='/blog' component={Blog} />
           <Route path='/blog/:post' component={Blog} />
+          <Route path='/*' component={NotFound} />
           <Route default component={NotFound} />
         </Router>
       </ErrorBoundary>

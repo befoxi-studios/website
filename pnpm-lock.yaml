@@ -11,6 +11,9 @@ importers:
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
+      is-mobile:
+        specifier: ^5.0.0
+        version: 5.0.0
       motion:
         specifier: ^12.5.0
         version: 12.5.0
@@ -48,6 +51,9 @@ importers:
       lucide-preact:
         specifier: ^0.483.0
         version: 0.483.0(preact@10.26.4)
+      preact-render-to-string:
+        specifier: ^6.5.13
+        version: 6.5.13(preact@10.26.4)
       rehype-katex:
         specifier: ^7.0.1
         version: 7.0.1
@@ -1305,6 +1311,9 @@ packages:
 
   is-hexadecimal@2.0.1:
     resolution: {integrity: sha512-DgZQp241c8oO6cA1SbTEWiXeoxV42vlcJxgH+B3hi1AiqqKruZR3ZGF8In3fj4+/y/7rHvlOZLZtgJ/4ttYGZg==}
+
+  is-mobile@5.0.0:
+    resolution: {integrity: sha512-Tz/yndySvLAEXh+Uk8liFCxOwVH6YutuR74utvOcu7I9Di+DwM0mtdPVZNaVvvBUM2OXxne/NhOs1zAO7riusQ==}
 
   is-plain-obj@4.1.0:
     resolution: {integrity: sha512-+Pgi+vMuUNkJyExiMBt5IlFoMyKnr5zhJ4Uspz58WOhBF5QoIZkFyNHIbBAtHwzVAgk5RtndVNsDRN61/mmDqg==}
@@ -3146,6 +3155,8 @@ snapshots:
   is-decimal@2.0.1: {}
 
   is-hexadecimal@2.0.1: {}
+
+  is-mobile@5.0.0: {}
 
   is-plain-obj@4.1.0: {}
 
