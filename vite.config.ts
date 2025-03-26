@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import preact from '@preact/preset-vite'
 import tailwindcss from '@tailwindcss/vite'
 import { ViteToml } from 'vite-plugin-toml'
+import ViteYaml from '@modyfi/vite-plugin-yaml'
 import mdx, { Options as MDXOptions } from '@mdx-js/rollup'
 import rehypeSlug from 'rehype-slug'
 import rehypeKatex from 'rehype-katex'
@@ -31,6 +32,7 @@ export default defineConfig({
     tailwindcss(),
     mdx(mdxOptions),
     ViteToml(),
+    ViteYaml(),
     cloudflare(),
   ],
   resolve: {

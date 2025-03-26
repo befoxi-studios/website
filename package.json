@@ -20,6 +20,7 @@
     "@cloudflare/vite-plugin": "^0.1.15",
     "@mdx-js/preact": "^3.1.0",
     "@mdx-js/rollup": "^3.1.0",
+    "@modyfi/vite-plugin-yaml": "^1.1.1",
     "@preact/preset-vite": "^2.10.1",
     "@tailwindcss/vite": "^4.0.14",
     "@types/unist": "^3.0.3",
