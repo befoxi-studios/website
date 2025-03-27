@@ -1,6 +1,7 @@
 name = "website"
 compatibility_date = "2024-12-30"
-main = "./worker/index.tsx"
+main = "worker/index.tsx"
+assets = { not_found_handling = "single-page-application", binding = "ASSETS" }
 
 [site]
 bucket = "./dist"

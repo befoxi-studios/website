@@ -1,31 +1,11 @@
-import React from 'preact/compat'
-import { render } from 'preact-render-to-string'
+//@ts-nocheck
 
-const htmlElement = () => {
-  return (
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-        <meta name="darkreader-lock" content="true" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
-        <meta property="og:title" content="Befoxi Studios" />
-        <meta property="og:description" content="Isn't just a place to make games, it's a place to grow with users." />
-        <title>Befoxi Studios</title>
-        <script type="module" src="/assets/index-BzGoyC1M.js"></script>
-        <link rel="stylesheet" href="/assets/index-CcW8SmJf.css" />
-      </head>
-      <body></body>
-    </html>
-  )
+interface Env {
+  ASSETS: Fetcher
 }
 
 export default {
-  fetch() {
-    const html = render(htmlElement())
-
-    return new Response(html, { headers: { 'Content-Type': 'text/html' }})
+  fetch(req, env): Promise<Response> {
+    return env.ASSETS.fetch(req)
   },
-}
+} satisfies ExportedHandler<Env>
