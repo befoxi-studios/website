@@ -1,9 +1,9 @@
 [submodule "src/submodules/blog"]
 	path = src/submodules/blog
-	url = https://github.com/befoxi-studios/blog-functions.git
+	url = git@github.com:befoxi-studios/blog-functions.git
 [submodule "src/submodules/search"]
 	path = src/submodules/search
-	url = https://github.com/befoxi-studios/search-functions.git
+	url = git@github.com:befoxi-studios/search-functions.git
 [submodule "src/submodules/roadmap"]
 	path = src/submodules/roadmap
-	url = https://github.com/befoxi-studios/roadmap-functions.git
+	url = git@github.com:befoxi-studios/roadmap-functions.git
