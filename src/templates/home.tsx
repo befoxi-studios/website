@@ -26,17 +26,17 @@ const Main = ({ scrolling }: MainProps) => {
       onScrollChange={scrolling}
     >
       <SectionWrapper className='items-center'>
-        <div class='mx-12 w-full sm:w-3xl max-w-none sm:max-w-lg lg:max-w-3xl text-center'>
+        <div class='mx-12 w-full sm:w-lg max-w-none sm:max-w-lg lg:max-w-3xl text-center'>
           <div class='flex flex-col items-center justify-center gap-[1.75rem] font-light'>
             <span class='text-[27pt] font-bold opacity-95'>Welcome to Befoxi Studios!</span>
           </div>
         </div>
       </SectionWrapper>
       <SectionWrapper className='items-center'>
-        <div class='mx-12 w-full sm:w-3xl max-w-none sm:max-w-lg lg:max-w-3xl text-center'>
+        <div class='mx-12 w-full sm:w-lg max-w-none sm:max-w-lg lg:max-w-3xl text-center'>
           <div class='flex flex-col items-center justify-center font-light'>
             <span class='text-on-background/95 text-center'>
-              <b class='text-on-background'>Befoxi Studios </b> is a game development studio that brings new experiences to players based on creative games and original worldviews.
+              We are a game development studio that brings new experiences to players based on creative games and original worldviews.
             </span>
             <br/>
             <span class='text-on-background/95 text-center'>
