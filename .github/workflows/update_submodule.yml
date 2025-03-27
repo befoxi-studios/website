@@ -17,18 +17,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup SSH for GitHub
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           submodules: recursive
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-key: ${{ secrets.KV_GITHUB_TOKEN }}
 
       - name: Configure git
         run: |
