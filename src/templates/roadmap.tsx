@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'preact/hooks'
 import { cn } from '../utils/cn'
-import type { RoadmapItem } from '../submodules/functions/roadmap/set/type'
-import roadmapItems from '../submodules/functions/roadmap/set/items'
+import type { RoadmapItem } from '../submodules/roadmap/set/type'
+import roadmapItems from '../submodules/roadmap/set/items'
 
 const Roadmap = () => {
   const [tab, setTab] = useState<string>(roadmapItems.find(t => t)?.name!)
