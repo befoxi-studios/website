@@ -1,0 +1,57 @@
+name: Update submodule
+
+on:
+  push:
+    branches:
+      - "**"
+
+permissions:
+  contents: write
+
+env:
+  BRANCH_NAME: "${{ github.ref_name }}"
+
+jobs:
+  update-submodule:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Ensure the script runs only on branches
+        run: |
+          if [[ "${{ github.ref }}" != refs/heads/* ]]; then
+            echo "This workflow runs only on branches. Exiting..."
+            exit 0
+          fi
+
+      - name: Update submodules
+        run: |
+          git submodule foreach --recursive bash -c '
+            branch_exists=$(git ls-remote --heads origin $BRANCH_NAME | wc -l)
+            if [[ $branch_exists -eq 1 ]]; then
+              git checkout $BRANCH_NAME
+              git pull origin $BRANCH_NAME
+            else
+              echo "Branch $BRANCH_NAME does not exist in submodule. Skipping..."
+            fi
+          '
+
+      - name: Commit and push if there are changes
+        run: |
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit --allow-empty -m "CI: Update submodule to latest commit from $BRANCH_NAME"
+            git push origin $BRANCH_NAME
+          fi
