@@ -7,7 +7,7 @@ import PostHead from '@/components/PostHead'
 import Post from '@/templates/post'
 import Error from '@/templates/error'
 import Loading from '@/components/Loading'
-import { fetchBlogMetadata } from '@/hooks/blog-hook'
+import { fetchBlogMetadata } from '@/hooks/useBlog'
 import type { Metadata } from '@/types/blog'
 
 const Blog = ({ children }: React.HTMLAttributes<HTMLElement>) => {

@@ -18,8 +18,8 @@ const getModule = async (fileModule: () => Promise<unknown>) => {
 }
 
 const getConfig = async () => {
-  const configs = import.meta.glob(`../../submodules/blog/.conf.toml`)
-  const selectedConfig = configs[`../../submodules/blog/.conf.toml`]
+  const configs = import.meta.glob(`../submodules/blog/.conf.toml`)
+  const selectedConfig = configs[`../submodules/blog/.conf.toml`]
 
   if (selectedConfig) {
     const module = await selectedConfig()
@@ -34,9 +34,9 @@ const getConfig = async () => {
 
 export const getPost = async (uri: string, countryCode?: string) => {
   const { file: { index } }: v1 = await getConfig()
-  const files = import.meta.glob(`../../submodules/blog/*/*.md(x)?`)
-  const indexFileRegex = new RegExp(`\.\.\/\.\.\/submodules${uri}\/${index}.mdx?`)
-  const internalFileRegex = new RegExp(`\.\.\/\.\.\/submodules${uri}\/${countryCode}.mdx?`)
+  const files = import.meta.glob(`../submodules/blog/*/*.md(x)?`)
+  const indexFileRegex = new RegExp(`\.\.\/submodules${uri}\/${index}.mdx?`)
+  const internalFileRegex = new RegExp(`\.\.\/submodules${uri}\/${countryCode}.mdx?`)
 
   const filePath = Object.keys(files).find(t => {
     if (countryCode) {
@@ -62,9 +62,9 @@ export const getPost = async (uri: string, countryCode?: string) => {
 export const getAllDir = async () => {
   const { file: { index } }: v1 = await getConfig()
 
-  const fileRegex = new RegExp(`^((\.\.\/\.\.\/submodules\/blog\/)([a-zA-Z0-9_-]+)\/)(${index}(\.mdx?))$`)
+  const fileRegex = new RegExp(`^((\.\.\/submodules\/blog\/)([a-zA-Z0-9_-]+)\/)(${index}(\.mdx?))$`)
 
-  const files = import.meta.glob(`../../submodules/blog/*/*.md(x)?`)
+  const files = import.meta.glob(`../submodules/blog/*/*.md(x)?`)
   const indexedFiles = Object.keys(files).filter(path => fileRegex.test(path))
   const selectedFiles: { [key: string]: Promise<any> } = {}
 
@@ -74,10 +74,10 @@ export const getAllDir = async () => {
 }
 
 export const getReadme = async (countryCode?: string) => {
-  const files = import.meta.glob(`../../submodules/blog/README(_*)?.md(x)?`)
+  const files = import.meta.glob(`../submodules/blog/README(_*)?.md(x)?`)
   const filename = `README${countryCode ? '_' + countryCode : ''}.md`
-  const mainFile = files['../../submodules/blog/README.md']
-  const selectedFile = files[`../../submodules/blog/${filename}`]
+  const mainFile = files['../submodules/blog/README.md']
+  const selectedFile = files[`../submodules/blog/${filename}`]
 
   if (selectedFile) {
     return getModule(selectedFile)
@@ -87,7 +87,7 @@ export const getReadme = async (countryCode?: string) => {
 }
 
 export const fetchBlogMetadata = async () => {
-  const fileRegex = new RegExp(`^((\.\.\/\.\.\/submodules\/blog\/)([a-zA-Z0-9_-]+)\/)(([a-zA-Z0-9_-]+)(\.mdx?))$`)
+  const fileRegex = new RegExp(`^((\.\.\/submodules\/blog\/)([a-zA-Z0-9_-]+)\/)(([a-zA-Z0-9_-]+)(\.mdx?))$`)
 
   const promisedDir = await getAllDir()
   const dirs = Object.keys(promisedDir)

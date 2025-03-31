@@ -3,7 +3,7 @@ import type { ComponentChildren, ComponentChild, VNode, JSXInternal } from 'prea
 import { useEffect, useState } from 'preact/hooks'
 import { cn } from '@/utils/cn'
 import { useGlobal } from '@/hooks/useGlobal'
-import { useScroll } from '@/hooks/scroll-hook'
+import { useScroll } from '@/hooks/useScroll'
 import type { ScrollViewProps } from '@/types/scroll-view'
 import ViewByNumberOfChildren from '@/components/ViewByNumberOfChildren'
 

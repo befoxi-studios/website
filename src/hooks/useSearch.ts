@@ -2,12 +2,12 @@ import { useState } from 'preact/hooks'
 import { isAll, isInclude, isStartsWith } from '@/utils/is'
 import { SearchResult } from '@/submodules/search/set/type'
 
-const routeFiles = import.meta.glob(`../../routes/**/!(_*)*.{js,jsx,ts,tsx}`, { eager: true })
-const blogFiles = import.meta.glob(`../../submodules/blog/*/index.{md,mdx}`, { eager: true })
+const routeFiles = import.meta.glob(`../routes/**/!(_*)*.{js,jsx,ts,tsx}`, { eager: true })
+const blogFiles = import.meta.glob(`../submodules/blog/*/index.{md,mdx}`, { eager: true })
 
 const queryRoutes = (query: string): (SearchResult | undefined)[] => {
   return Object.keys(routeFiles).map(path => {
-    const regex = /^\.\.\/\.\.\/(routes)\/(([a-zA-Z0-9_-]+)\.(jsx?|tsx?))$/
+    const regex = /^\.\.\/(routes)\/(([a-zA-Z0-9_-]+)\.(jsx?|tsx?))$/
     const rule = path.replace(regex, 'page:$3')
     const pureRule = path.replace(regex, '$3')
     const newPath = path + `?sr=${rule},${pureRule}`
@@ -17,6 +17,7 @@ const queryRoutes = (query: string): (SearchResult | undefined)[] => {
       || isStartsWith(rule, query.toLowerCase())
       || isInclude(pureRule, query.toLowerCase())
     ) {
+      console.log('a')
       return {
         type: 'page',
         path: newPath,
@@ -28,7 +29,7 @@ const queryRoutes = (query: string): (SearchResult | undefined)[] => {
 
 const queryBlog = (query: string): (SearchResult | undefined)[] => {
   return Object.keys(blogFiles).map(path => {
-    const regex = /^\.\.\/\.\.\/submodules\/(blog)\/([a-zA-Z0-9_-]+)\/((.+)\.mdx)?$/
+    const regex = /^\.\.\/submodules\/(blog)\/([a-zA-Z0-9_-]+)\/((.+)\.mdx)?$/
     const rule = path.replace(regex, '$1:$2')
     const pureRule = path.replace(regex, '$2')
     const newPath = path + `?sr=${rule}`

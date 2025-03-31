@@ -3,7 +3,7 @@ import { useLocation } from 'preact-iso'
 import { SearchIcon } from 'lucide-preact'
 import { cn } from '@/utils/cn'
 import { useGlobal } from '@/hooks/useGlobal'
-import { useSearch } from '@/hooks/search-hook'
+import { useSearch } from '@/hooks/useSearch'
 import getNameByPath from '@/utils/get-name-by-path'
 import type { SearchResult } from '@/submodules/search/set/type'
 import searchCustom from '@/submodules/search/set/custom'
@@ -15,7 +15,7 @@ type anyParams = { [key: string]: any }
 const handleSearchItem = (result: SearchResult, key: string, params: anyParams) => {
   const prop = searchProps[result.type]
   if (prop) {
-    prop.callback(key, params)
+    prop.effect(key, params)
   }
 }
 
