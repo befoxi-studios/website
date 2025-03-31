@@ -1,7 +1,7 @@
 import { useLocation } from 'preact-iso'
 import { cn } from '../utils/cn'
 import GithubIcon from '../components/GithubIcon'
-import { SearchBar, SearchWindow } from './search'
+import { SearchBar, SearchDialog } from './search'
 
 const Logo = () => {
   const location = useLocation()
@@ -43,7 +43,7 @@ const Header = ({ menu = ['logo'] }: { menu?: ('logo' | 'search' | 'items')[] })
       {menu.includes('search') ? (<SearchBar />) : <div class='pointer-events-none'></div>}
       {menu.includes('items') && (<Items />)}
     </header>
-    <SearchWindow />
+    <SearchDialog />
   </>)
 }
 

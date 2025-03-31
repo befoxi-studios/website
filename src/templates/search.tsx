@@ -9,6 +9,7 @@ import getNameByPath from '../utils/get-name-by-path'
 import type { SearchResult } from '../submodules/search/set/type'
 import searchCustom from '../submodules/search/set/custom'
 import searchProps from '../submodules/search/set/props'
+import Dialog, { DialogHeader } from '../components/Dialog'
 
 type anyParams = { [key: string]: any }
 
@@ -108,7 +109,7 @@ export const SearchBar = () => {
   )
 }
 
-export const SearchWindow = () => {
+export const SearchDialog = () => {
   const location = useLocation()
   const { isSearchOpen, changeSearchState } = useStore()
   const { results: searchResults, search } = useSearch(searchCustom)
@@ -202,56 +203,21 @@ export const SearchWindow = () => {
   }, [variableInputValue])
 
   return (
-    <AnimatePresence>
-      {isSearchOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
-          class='absolute inset-0 flex items-center justify-center p-2 sm:p-8 bg-black/45 backdrop-blur-xs z-150'
-        >
-          <div
-            class='absolute inset-0'
-            onClick={() => changeSearchState(false)}
-          ></div>
-          <div class={cn`
-            flex flex-col sm:flex-col w-full max-w-full sm:max-w-md h-full sm:h-auto bg-black
-            border border-neutral-200/15 rounded-md z-1 transition-opacity
-          `}>
-            <div class='flex flex-row'>
-              <div class='flex flex-row items-center gap-2 px-2 py-1 m-1 w-full text-neutral-50/45'>
-                <SearchIcon width={20} height={20} strokeWidth={0.75} />
-                <input
-                  ref={inputRef}
-                  class='w-full bg-transparent text-neutral-50 outline-0 text-sm font-normal'
-                  placeholder='Search'
-                  onInput={handleInput}
-                />
-              </div>
-              <button
-                class={cn`
-                  group/search-close relative flex items-center justify-center px-2
-                  focus-within:[&>div]:bg-neutral-200/8 border-l border-l-neutral-200/15 outline-0 cursor-pointer
-                `}
-                onClick={() => changeSearchState(false)}
-              >
-                <div class={cn`
-                  absolute inset-0 m-1 group-hover/search-close:bg-neutral-200/8
-                  rounded-sm pointer-events-none
-                `}></div>
-                <XIcon width={21} height={21} strokeWidth={0.75} />
-              </button>
-            </div>
-            {!!searchResults.length && (<>
-              <hr class='border-neutral-200/15' />
-              <div class='flex flex-col p-1 h-full max-h-none sm:max-h-[16em] text-sm overflow-auto' tabIndex={-1}>
-                {searchResults.sort(sortSearchResult).map(indexingSearchResults)}
-              </div>
-            </>)}
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <Dialog open={isSearchOpen} stateChanged={changeSearchState}>
+      {!!searchResults.length && (<>
+        <div class='flex flex-col p-1 h-full max-h-none sm:max-h-[16em] text-sm overflow-auto' tabIndex={-1}>
+          {searchResults.sort(sortSearchResult).map(indexingSearchResults)}
+        </div>
+      </>)}
+      <DialogHeader>
+        <SearchIcon width={20} height={20} strokeWidth={0.75} />
+        <input
+          ref={inputRef}
+          class='w-full bg-transparent text-neutral-50 outline-0 text-sm font-normal'
+          placeholder='Search'
+          onInput={handleInput}
+        />
+      </DialogHeader>
+    </Dialog>
   )
 }
