@@ -110,7 +110,7 @@ export const SearchBar = () => {
 
 export const SearchDialog = () => {
   const location = useLocation()
-  const { isSearchOpen, changeSearchState } = useStore()
+  const { isSearchOpen, changeSearchState } = useGlobal()
   const { results: searchResults, search } = useSearch(searchCustom)
   const [variableInputValue, setVariableInputValue] = useState('')
   const inputRef = useRef<HTMLInputElement | null>(null)
