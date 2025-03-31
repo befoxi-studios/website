@@ -11,10 +11,8 @@ dayjs.extend(relativeTime)
 dayjs.extend(localizedFormat)
 
 import Home from '../routes/home'
-const AboutUs = lazy(() => import('../routes/about-us'))
-const Contact = lazy(() => import('../routes/contact'))
-const Roadmap = lazy(() => import('../routes/roadmap'))
 const Blog = lazy(() => import('../routes/blog'))
+const Roadmap = lazy(() => import('../routes/roadmap'))
 const NotFound = lazy(() => import('../routes/_404'))
 
 export function App() {
@@ -28,11 +26,9 @@ export function App() {
         <Router>
           <Route path='/' component={Home} />
           <Route path='/home' component={Home} />
-          <Route path='/about-us' component={AboutUs} />
-          <Route path='/contact' component={Contact} />
-          <Route path='/roadmap' component={Roadmap} />
           <Route path='/blog' component={Blog} />
           <Route path='/blog/:post' component={Blog} />
+          <Route path='/roadmap' component={Roadmap} />
           <Route default component={NotFound} />
         </Router>
       </ErrorBoundary>

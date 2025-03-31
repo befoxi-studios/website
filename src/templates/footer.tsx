@@ -11,8 +11,14 @@ const Footer = ({ className }: React.HTMLAttributes<HTMLElement>) => {
         <div class='hidden md:flex flex-col mr-8 last:mr-auto'>
           <h1 class='mb-5 text-on-background text-xl font-semibold'>General</h1>
           <div class='flex flex-col gap-1.5'>
+            {/* Currently not in use.
+
+              * If you write a blog post called "about-us" or whatever,
+                link directly to it.
             <a href='/about-us'>About us</a>
-            <a href='/contact'>Contact</a>
+
+              * Enter email or contact information when you have it.
+            <a href='mailto:contact@befoxistudios.com' target='_blank'>Contact</a> */}
             <a href='/roadmap'>Roadmap</a>
             <a href='/blog'>Blog</a>
           </div>
