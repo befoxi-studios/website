@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { useLocation } from 'preact-iso'
 import { SearchIcon } from 'lucide-preact'
-import { cn } from '../utils/cn'
-import { useStore } from '../utils/hooks/global-hook'
-import { useSearch } from '../utils/hooks/search-hook'
-import getNameByPath from '../utils/get-name-by-path'
-import type { SearchResult } from '../submodules/search/set/type'
-import searchCustom from '../submodules/search/set/custom'
-import searchProps from '../submodules/search/set/props'
-import Dialog, { DialogHeader } from '../components/Dialog'
+import { cn } from '@/utils/cn'
+import { useGlobal } from '@/hooks/useGlobal'
+import { useSearch } from '@/hooks/search-hook'
+import getNameByPath from '@/utils/get-name-by-path'
+import type { SearchResult } from '@/submodules/search/set/type'
+import searchCustom from '@/submodules/search/set/custom'
+import searchProps from '@/submodules/search/set/props'
+import Dialog, { DialogHeader } from '@/components/Dialog'
 
 type anyParams = { [key: string]: any }
 
@@ -69,7 +69,7 @@ const searchIndex = (result: SearchResult | undefined, clientProvide: anyParams)
 }
 
 export const SearchBar = () => {
-  const { isSearchOpen, changeSearchState } = useStore()
+  const { isSearchOpen, changeSearchState } = useGlobal()
 
   const handleKeydown = (event: KeyboardEvent) => {
     const key = event.key || event.code

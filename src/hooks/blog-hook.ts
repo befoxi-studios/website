@@ -1,5 +1,5 @@
-import { v1 } from '../../types/blog'
-import type { ModuleType, Metadata, MetadataVariable } from '../../types/blog'
+import { v1 } from '@/types/blog'
+import type { ModuleType, Metadata, MetadataVariable } from '@/types/blog'
 
 const throwDoesNotExistError = () => {
   return new Error('The file cannot be found or does not exist.')

@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'preact/hooks'
 import { useLocation } from 'preact-iso'
 import dayjs from 'dayjs'
-import Header from './header'
-import { fetchBlogMetadata } from '../utils/hooks/blog-hook'
-import type { Metadata } from '../types/blog'
-import PostHead from '../components/PostHead'
-import Post from './post'
-import Error from './error'
-import Loading from '../components/Loading'
-import { cn } from '../utils/cn'
+import { cn } from '@/utils/cn'
+import Header from '@/templates/header'
+import PostHead from '@/components/PostHead'
+import Post from '@/templates/post'
+import Error from '@/templates/error'
+import Loading from '@/components/Loading'
+import { fetchBlogMetadata } from '@/hooks/blog-hook'
+import type { Metadata } from '@/types/blog'
 
 const Blog = ({ children }: React.HTMLAttributes<HTMLElement>) => {
   const location = useLocation()

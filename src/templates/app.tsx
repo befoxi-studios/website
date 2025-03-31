@@ -1,11 +1,11 @@
-import './styles/fonts.css'
+import '@/styles/fonts.css'
 import { useEffect } from 'preact/hooks'
 import { Router, Route, LocationProvider, ErrorBoundary, lazy } from 'preact-iso'
 
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
-import '../utils/import-all-dayjs-locales'
+import '@/utils/import-all-dayjs-locales'
 
 dayjs.extend(relativeTime)
 dayjs.extend(localizedFormat)

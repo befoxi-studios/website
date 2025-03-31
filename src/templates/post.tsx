@@ -1,12 +1,12 @@
-import '../templates/styles/markdown.css'
+import '@/styles/markdown.css'
 import type { ReactElement } from 'preact/compat'
 import { useEffect, useState } from 'preact/hooks'
 import { MDXProvider } from '@mdx-js/preact'
-import { cn } from '../utils/cn'
-import { getPost } from '../utils/hooks/blog-hook'
-import type { MDXComponents } from '../types/mdx-components'
-import type { ModuleType, MDXContent, MetadataVariable } from '../types/blog'
-import PostBody from '../components/PostBody'
+import { cn } from '@/utils/cn'
+import { getPost } from '@/hooks/blog-hook'
+import type { MDXComponents } from '@/types/mdx-components'
+import type { ModuleType, MDXContent, MetadataVariable } from '@/types/blog'
+import PostBody from '@/components/PostBody'
 
 interface PostProps {
   /** @deprecated */

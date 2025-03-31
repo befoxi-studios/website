@@ -1,7 +1,7 @@
-import { XIcon } from 'lucide-preact'
-import { useLocation } from 'preact-iso'
 import { useEffect, useState } from 'preact/hooks'
-import { cn } from '../utils/cn'
+import { useLocation } from 'preact-iso'
+import { XIcon } from 'lucide-preact'
+import { cn } from '@/utils/cn'
 
 const PostBody = ({ children }: React.HTMLAttributes<HTMLElement>) => {
   const location = useLocation()

@@ -1,9 +1,9 @@
 import { Component } from 'preact'
 import { useState } from 'preact/hooks'
-import Loading from '../components/Loading'
-import Background from '../templates/background'
-import Header from '../templates/header'
-import Main from '../templates/home'
+import Loading from '@/components/Loading'
+import Background from '@/templates/background'
+import Header from '@/templates/header'
+import Main from '@/templates/home'
 
 export default class Home extends Component {
   componentDidMount(): void {

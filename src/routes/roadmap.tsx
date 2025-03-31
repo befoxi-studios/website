@@ -1,7 +1,7 @@
 import { Component } from 'preact'
-import Loading from '../components/Loading'
-import Header from '../templates/header'
-import Roadmap from '../templates/roadmap'
+import Loading from '@/components/Loading'
+import Header from '@/templates/header'
+import Roadmap from '@/templates/roadmap'
 
 export default class Contact extends Component {
   componentDidMount(): void {

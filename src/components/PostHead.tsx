@@ -1,9 +1,9 @@
-import '../templates/styles/pixelated.css'
-import dayjs from 'dayjs'
-import { cn } from '../utils/cn'
-import type { Metadata } from '../types/blog'
+import '@/styles/pixelated.css'
 import { useEffect, useState } from 'preact/hooks'
 import { useLocation } from 'preact-iso'
+import dayjs from 'dayjs'
+import { cn } from '@/utils/cn'
+import type { Metadata } from '@/types/blog'
 
 interface PostHeadProps extends React.HTMLAttributes<HTMLElement> {
   meta: Metadata | null

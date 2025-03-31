@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'preact/hooks'
-import { useStore } from './global-hook'
+import { useGlobal } from '@/hooks/useGlobal'
 
 /**
  * A scroll function like this
@@ -7,7 +7,7 @@ import { useStore } from './global-hook'
  * @param level Specifies the number of scrollable times
  */
 export const useScroll = (max: number = 100, level: number = 5) => {
-  const { isSearchOpen } = useStore()
+  const { isSearchOpen } = useGlobal()
   
   const scrollLevel = level - 1
 

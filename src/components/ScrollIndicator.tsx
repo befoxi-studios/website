@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'preact/hooks'
-import { cn } from '../utils/cn'
-import type { IndicatorType } from '../types/scroll-view'
-import { useStore } from '../utils/hooks/global-hook'
+import { cn } from '@/utils/cn'
+import { useGlobal } from '@/hooks/useGlobal'
+import type { IndicatorType } from '@/types/scroll-view'
 
 type TestKeys = { start: string[], end: string[], previous: string[], next: string[] }
 
@@ -41,7 +41,7 @@ const Indicator = ({
   rowPreviousKey = ['pageup'],
   rowNextKey = ['pagedown'],
 }: IndicatorProps) => {
-  const { isSearchOpen } = useStore()
+  const { isSearchOpen } = useGlobal()
 
   const [testKeys, setTestKeys] = useState<TestKeys>({
     start: startKey,

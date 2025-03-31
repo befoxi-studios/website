@@ -1,14 +1,14 @@
 // @ts-ignore | JSXInternal: For external use
 import type { ComponentChildren, ComponentChild, VNode, JSXInternal } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
-import { cn } from '../utils/cn'
-import { useStore } from '../utils/hooks/global-hook'
-import { useScroll } from '../utils/hooks/scroll-hook'
-import { ScrollViewProps } from '../types/scroll-view'
-import ViewByNumberOfChildren from './ViewByNumberOfChildren'
+import { cn } from '@/utils/cn'
+import { useGlobal } from '@/hooks/useGlobal'
+import { useScroll } from '@/hooks/scroll-hook'
+import type { ScrollViewProps } from '@/types/scroll-view'
+import ViewByNumberOfChildren from '@/components/ViewByNumberOfChildren'
 
 const ScrollView = ({ max = 100, page = 5, indicator, onScrollChange, children }: ScrollViewProps) => {
-  const { isSearchOpen } = useStore()
+  const { isSearchOpen } = useGlobal()
   const { progress, current, touch, to } = useScroll(max, page)
 
   const reactDistance = 75

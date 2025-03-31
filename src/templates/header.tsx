@@ -1,7 +1,7 @@
 import { useLocation } from 'preact-iso'
-import { cn } from '../utils/cn'
-import GithubIcon from '../components/GithubIcon'
-import { SearchBar, SearchDialog } from './search'
+import { cn } from '@/utils/cn'
+import { SearchBar, SearchDialog } from '@/templates/search'
+import GithubIcon from '@/components/GithubIcon'
 
 const Logo = () => {
   const location = useLocation()

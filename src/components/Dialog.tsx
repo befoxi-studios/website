@@ -1,8 +1,8 @@
 import { ComponentChild, ComponentChildren } from 'preact'
 import { AnimatePresence, motion } from 'motion/react'
 import { XIcon } from 'lucide-preact'
-import { cn } from '../utils/cn'
-import type { DefineClass } from '../types/define-class'
+import { cn } from '@/utils/cn'
+import type { DefineClass } from '@/types/define-class'
 
 const elementGetter = (match: string, children: ComponentChildren) => {
   const child = children as ComponentChild[]

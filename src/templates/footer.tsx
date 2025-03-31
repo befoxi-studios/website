@@ -1,4 +1,4 @@
-import { cn } from '../utils/cn'
+import { cn } from '@/utils/cn'
 
 const Footer = ({ className }: React.HTMLAttributes<HTMLElement>) => {
   return (

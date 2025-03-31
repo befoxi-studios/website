@@ -1,7 +1,7 @@
-import Footer from './footer'
-import Indicator from '../components/ScrollIndicator'
-import ScrollView from '../components/ScrollView'
-import SectionWrapper from '../components/SectionWrapper'
+import Footer from '@/templates/footer'
+import Indicator from '@/components/ScrollIndicator'
+import ScrollView from '@/components/ScrollView'
+import SectionWrapper from '@/components/SectionWrapper'
 
 interface MainProps {
   scrolling: (progress: number) => void
