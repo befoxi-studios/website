@@ -5,6 +5,12 @@ export type DefineClassProps = {
   style?: JSXInternal.Signalish<string | JSXInternal.CSSProperties | undefined>
 }
 
+export type DefineClassType = {
+  length: number
+  name: string
+}
+
 export interface DefineClass extends VNode {
   props: DefineClassProps
+  type: DefineClassType
 }
