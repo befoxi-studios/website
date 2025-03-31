@@ -17,7 +17,6 @@ const queryRoutes = (query: string): (SearchResult | undefined)[] => {
       || isStartsWith(rule, query.toLowerCase())
       || isInclude(pureRule, query.toLowerCase())
     ) {
-      console.log('a')
       return {
         type: 'page',
         path: newPath,
