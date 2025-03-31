@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { useLocation } from 'preact-iso'
-import { AnimatePresence, motion } from 'motion/react'
-import { SearchIcon, XIcon } from 'lucide-preact'
+import { SearchIcon } from 'lucide-preact'
 import { cn } from '../utils/cn'
 import { useStore } from '../utils/hooks/global-hook'
 import { useSearch } from '../utils/hooks/search-hook'
