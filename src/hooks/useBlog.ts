@@ -1,4 +1,4 @@
-import { FILES_OF_BLOG, FILES_OF_BLOG_README, FILES_OF_CONFIG } from '@/utils/files'
+import { FILES_OF_BLOG, FILES_OF_BLOG_README, FILES_OF_BLOG_CONFIG } from '@/utils/files'
 import type { v1, ModuleType, Metadata, MetadataVariable } from '@/types/blog'
 
 const throwDoesNotExistError = () => {
@@ -18,7 +18,7 @@ const getModule = async (fileModule: () => Promise<unknown>) => {
 }
 
 const getConfig = async () => {
-  const selectedConfig = FILES_OF_CONFIG[`../submodules/blog/.conf.toml`]
+  const selectedConfig = FILES_OF_BLOG_CONFIG[`../submodules/blog/.conf.toml`]
 
   if (selectedConfig) {
     const module = await selectedConfig()
