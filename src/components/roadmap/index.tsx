@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'preact/hooks'
+import { ReceiptTextIcon } from 'lucide-preact'
 import { cn } from '@/utils/cn'
 import RoadmapTab from '@/components/roadmap/RoadmapTab'
 import RoadmapTable from '@/components/roadmap/RoadmapTable'
@@ -58,7 +59,9 @@ const Roadmap = () => {
           </div>
         </>) : (
           <div class='flex items-center justify-center h-full'>
-            <span class='text-mono font-light opacity-65'>Sorry, There is no roadmap yet.</span>
+            <span class='text-mono font-light animate-pulse'>
+              <ReceiptTextIcon class='opacity-50' />
+            </span>
           </div>
         )}
       </div>
