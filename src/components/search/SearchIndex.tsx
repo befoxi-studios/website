@@ -31,9 +31,11 @@ const SearchIndex = (result: SearchResult | undefined, clientProvide: anyParams)
     return (
       <div
         class={cn`
-          flex flex-row justify-between px-1.5 py-1 hover:bg-neutral-200/15 rounded-sm
+          flex flex-row justify-between px-1.5 py-1
+          hover:bg-neutral-200/15 focus-within:bg-neutral-200/8 outline-0 rounded-sm
           transition-colors cursor-pointer select-none
         `}
+        tabIndex={0}
         onClick={() => handleSearchItem(result, key, userProvide)}
       >
         <div class='flex flex-row items-start gap-2'>

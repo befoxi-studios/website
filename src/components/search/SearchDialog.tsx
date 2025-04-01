@@ -14,7 +14,7 @@ const SearchDialog = () => {
   const location = useLocation()
   const { isSearchOpen, changeSearchState } = useGlobal()
   const { results: searchResults, search } = useSearch(searchCustom)
-  const [variableInputValue, setVariableInputValue] = useState('')
+  const [variableInputValue, setVariableInputValue] = useState<string | undefined>()
   const inputRef = useRef<HTMLInputElement | null>(null)
 
   const handleInput = (event: InputEvent) => {
@@ -25,9 +25,23 @@ const SearchDialog = () => {
   }
 
   const handleKeydown = (event: KeyboardEvent) => {
-    const key = event.key || event.code
+    const key = (event.key || event.code).toLowerCase()
 
-    if (key.toLowerCase() === 'escape') {
+    if (key === '/') {
+      const input = inputRef.current
+
+      if (input && input !== document.activeElement) {
+        event.preventDefault()
+        input.focus()
+      }
+    }
+    if (key === 'enter') {
+      const currentElem = document.activeElement as HTMLElement
+      if (currentElem.click) {
+        currentElem.click()
+      }
+    }
+    if (key === 'escape') {
       changeSearchState(false)
     }
   }
@@ -97,9 +111,10 @@ const SearchDialog = () => {
 
   useEffect(() => {
     const input = inputRef.current
-    if (input) {
+    if (input && variableInputValue) {
       input.value = variableInputValue // only the contents of the search input change
       search(variableInputValue)
+      setTimeout(() => setVariableInputValue(undefined), 1)
     }
   }, [variableInputValue])
 
@@ -108,7 +123,6 @@ const SearchDialog = () => {
       {!!searchResults.length && (<>
         <div
           class='flex flex-col p-1 h-full max-h-none sm:max-h-[16em] text-sm overflow-auto'
-          tabIndex={-1}
         >
           {searchResults.sort(sortSearchResult).map(indexingSearchResults)}
         </div>
