@@ -2,10 +2,11 @@ import { useEffect, useState } from 'preact/hooks'
 
 interface SlideProps {
   delay?: number
+  duration?: number
   from?: 'left' | 'top' | 'right' | 'bottom'
 }
 
-const Loading = ({ delay = 175, from = 'bottom' }: SlideProps) => {
+const Loading = ({ delay = 175, duration = 150, from = 'bottom' }: SlideProps) => {
   const [sliding, setSliding] = useState(false)
 
   useEffect(() => {
@@ -21,7 +22,8 @@ const Loading = ({ delay = 175, from = 'bottom' }: SlideProps) => {
           : from === 'left' ? '100% 0'
           : from === 'top'  ? '0 100%'
           : from === 'right'? '-100% 0'
-          : /** to-bottom  */ '0 -100%'
+          : /** to-bottom  */ '0 -100%',
+        transitionDuration: `${duration}ms`,
       }}
     ></div>
   )
