@@ -8,7 +8,7 @@ import Background from '@/components/Background'
 import SectionWrapper from '@/components/SectionWrapper'
 import Footer from '@/templates/footer'
 
-export default class Home extends Component {
+export default class HomeRoute extends Component {
   componentDidMount(): void {
     document.title = 'Befoxi Studios'
   }

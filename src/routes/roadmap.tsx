@@ -1,10 +1,13 @@
 import { Component } from 'preact'
+import { cn } from '@/utils/cn'
 import Loading from '@/components/ui/Loading'
 import Header from '@/components/header'
 import Roadmap from '@/components/roadmap'
-import { cn } from '@/utils/cn'
 
-export default class Contact extends Component {
+export default class RoadmapRoute extends Component {
+  name = 'Roadmap'
+  path = '/roadmap'
+
   componentDidMount(): void {
     document.title = 'Roadmap - Befoxi Studios'
   }

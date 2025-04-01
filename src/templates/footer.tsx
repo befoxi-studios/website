@@ -1,4 +1,5 @@
 import { cn } from '@/utils/cn'
+import RouteLinks from '@/components/RouteLinks'
 
 const Footer = ({ className }: React.HTMLAttributes<HTMLElement>) => {
   return (
@@ -19,8 +20,7 @@ const Footer = ({ className }: React.HTMLAttributes<HTMLElement>) => {
 
               * Enter email or contact information when you have it.
             <a href='mailto:contact@befoxistudios.com' target='_blank'>Contact</a> */}
-            <a href='/roadmap'>Roadmap</a>
-            <a href='/blog'>Blog</a>
+            <RouteLinks />
           </div>
         </div>
         {/* <div class='flex flex-col'>

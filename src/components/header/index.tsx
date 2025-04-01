@@ -3,13 +3,13 @@ import Logo from '@/components/header/Logo'
 import SearchBar from '@/components/search/SearchBar'
 import SearchDialog from '@/components/search/SearchDialog'
 import GithubIcon from '@/components/icons/GithubIcon'
+import RouteLinks from '@/components/RouteLinks'
 import type { HeaderProps } from '@/types/header'
 
 const Items = () => {
   return (
     <div class='hidden md:flex items-center justify-end gap-6 text-neutral-50/50'>
-      <a href='/roadmap' class='hover:text-neutral-50/75 transition-colors duration-150'>Roadmap</a>
-      <a href='/blog' class='hover:text-neutral-50/75 transition-colors duration-150'>Blog</a>
+      <RouteLinks className='hover:text-neutral-50/75 transition-colors duration-150' />
       <a target='_blank'
         href='https://github.com/befoxi-studios'
         class={cn`

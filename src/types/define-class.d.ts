@@ -1,3 +1,5 @@
+import { Component } from 'preact'
+
 export type DefineClassProps = {
   children: ComponentChildren
   className?: string
@@ -13,4 +15,9 @@ export type DefineClassType = {
 export interface DefineClass extends VNode {
   props: DefineClassProps
   type: DefineClassType
+}
+
+export interface DefineReference extends Component {
+  name?: string
+  path?: string
 }
