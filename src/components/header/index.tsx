@@ -3,7 +3,7 @@ import Logo from '@/components/header/Logo'
 import SearchBar from '@/components/search/SearchBar'
 import SearchDialog from '@/components/search/SearchDialog'
 import GithubIcon from '@/components/icons/GithubIcon'
-import RouteLinks from '@/components/RouteLinks'
+import RouteLinks from '@/components/ui/RouteLinks'
 import type { HeaderProps } from '@/types/header'
 
 const Items = () => {

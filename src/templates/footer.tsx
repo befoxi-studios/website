@@ -1,5 +1,5 @@
 import { cn } from '@/utils/cn'
-import RouteLinks from '@/components/RouteLinks'
+import RouteLinks from '@/components/ui/RouteLinks'
 
 const Footer = ({ className }: React.HTMLAttributes<HTMLElement>) => {
   return (
