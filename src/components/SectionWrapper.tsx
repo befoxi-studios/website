@@ -1,4 +1,4 @@
-import { cn } from '../utils/cn'
+import { cn } from '@/utils/cn'
 
 const SectionWrapper = ({ className = '', children }: React.HTMLAttributes<HTMLElement>) => {
   return (

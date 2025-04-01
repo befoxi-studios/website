@@ -1,11 +1,7 @@
 import { ComponentChild } from 'preact'
-import { DefineClass, DefineClassProps } from '../types/define-class'
+import { DefineClass, DefineClassProps } from '@/types/define-class'
 
-interface ViewByNumberOfChildrenProps extends DefineClassProps {
-  index: number
-}
-
-const ViewByNumberOfChildren = ({ index, children }: ViewByNumberOfChildrenProps) => {
+const ViewByNumberOfChildren = ({ index, children }: DefineClassProps & { index: number }) => {
   const child = children as ComponentChild[]
   child.map((elem, _childIndex) => {
     const newElem = (elem as DefineClass)

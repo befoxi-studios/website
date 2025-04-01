@@ -4,7 +4,7 @@ import { useEffect, useState } from 'preact/hooks'
 import { cn } from '@/utils/cn'
 import { useGlobal } from '@/hooks/useGlobal'
 import { useScroll } from '@/hooks/useScroll'
-import type { ScrollViewProps } from '@/types/scroll-view'
+import type { ScrollViewProps } from '@/types/scroll'
 import ViewByNumberOfChildren from '@/components/ViewByNumberOfChildren'
 
 const ScrollView = ({ max = 100, page = 5, indicator, onScrollChange, children }: ScrollViewProps) => {

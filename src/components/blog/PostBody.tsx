@@ -13,7 +13,7 @@ const PostBody = ({ children }: React.HTMLAttributes<HTMLElement>) => {
   }, [])
 
   return (
-    <div class='relative flex items-center justify-center p-0 lg:p-6 h-[calc(100dvh-(var(--spacing)*15))]'>
+    <div class='relative flex items-center justify-center p-0 md:p-6 h-[calc(100dvh-(var(--spacing)*15))]'>
       <div
         class='absolute inset-0 transition-all duration-500 z-0'
         style={{ backdropFilter: isOpen ? 'blur(8px)' : 'blur(0)' }}
@@ -21,8 +21,8 @@ const PostBody = ({ children }: React.HTMLAttributes<HTMLElement>) => {
       ></div>
       <div
         class={cn`
-          relative max-w-none lg:max-w-lg max-h-[43rem] bg-neutral-950 border border-neutral-200/3
-          rounded-none lg:rounded-md overflow-auto transition-all duration-500 z-1
+          relative min-w-screen md:min-w-lg max-h-[43rem] bg-neutral-950 border border-neutral-200/3
+          rounded-none md:rounded-md overflow-auto transition-[height] duration-500 z-1
         `}
         style={{ height: isOpen ? '100%' : '0%' }}
       >

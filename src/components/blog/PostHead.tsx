@@ -3,12 +3,7 @@ import { useEffect, useState } from 'preact/hooks'
 import { useLocation } from 'preact-iso'
 import dayjs from 'dayjs'
 import { cn } from '@/utils/cn'
-import type { Metadata } from '@/types/blog'
-
-interface PostHeadProps extends React.HTMLAttributes<HTMLElement> {
-  meta: Metadata | null
-  delay?: number
-}
+import type { PostHeadProps } from '@/types/blog'
 
 const PostHead = ({ meta, delay, className }: PostHeadProps) => {
   const location = useLocation()

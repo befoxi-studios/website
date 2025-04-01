@@ -1,22 +1,9 @@
-import { useLocation } from 'preact-iso'
 import { cn } from '@/utils/cn'
-import { SearchBar, SearchDialog } from '@/templates/search'
-import GithubIcon from '@/components/GithubIcon'
-
-const Logo = () => {
-  const location = useLocation()
-
-  return (
-    <div class='flex items-center justify-start mx-1'>
-      <button
-        class='cursor-pointer select-none'
-        onClick={() => location.route('/')}
-      >
-        <span class='text-[#ffffffd7] text-xl font-semibold truncate'>Befoxi Studios</span>
-      </button>
-    </div>
-  )
-}
+import Logo from '@/components/header/Logo'
+import SearchBar from '@/components/search/SearchBar'
+import SearchDialog from '@/components/search/SearchDialog'
+import GithubIcon from '@/components/icons/GithubIcon'
+import type { HeaderProps } from '@/types/header'
 
 const Items = () => {
   return (
@@ -36,7 +23,7 @@ const Items = () => {
   )
 }
 
-const Header = ({ menu = ['logo'] }: { menu?: ('logo' | 'search' | 'items')[] }) => {
+const Header = ({ menu = ['logo'] }: HeaderProps) => {
   return (<>
     <header class='flex md:grid grid-cols-3 items-center justify-between px-4 backdrop-blur-lg z-10'>
       {menu.includes('logo') ? (<Logo />) : <div class='pointer-events-none'></div>}

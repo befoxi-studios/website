@@ -1,27 +1,8 @@
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { cn } from '@/utils/cn'
 import { useGlobal } from '@/hooks/useGlobal'
-import type { IndicatorType } from '@/types/scroll-view'
+import type { ScrollIndicatorProps, ScrollIndicatorTestKeys } from '@/types/scroll'
 
-type TestKeys = { start: string[], end: string[], previous: string[], next: string[] }
-
-interface IndicatorProps extends IndicatorType {
-  // Classname
-  className?: string
-  colClassName?: string
-  rowClassName?: string
-  indicatorClassName?: string
-  indicatorColClassName?: string
-  indicatorRowClassName?: string
-  indicatorActiveClassName?: string
-  // Keyboard
-  startKey?: string[]
-  endKey?: string[]
-  colPreviousKey?: string[]
-  colNextKey?: string[]
-  rowPreviousKey?: string[]
-  rowNextKey?: string[]
-}
 
 const Indicator = ({
   direction = 'col',
@@ -40,10 +21,10 @@ const Indicator = ({
   colNextKey = ['pagedown'],
   rowPreviousKey = ['pageup'],
   rowNextKey = ['pagedown'],
-}: IndicatorProps) => {
+}: ScrollIndicatorProps) => {
   const { isSearchOpen } = useGlobal()
 
-  const [testKeys, setTestKeys] = useState<TestKeys>({
+  const [testKeys, setTestKeys] = useState<ScrollIndicatorTestKeys>({
     start: startKey,
     end: endKey,
     previous: ['pageup'],

@@ -1,6 +1,6 @@
 import { Component } from 'preact'
 import Error from '@/templates/error'
-import Loading from '@/components/Loading'
+import Loading from '@/components/ui/Loading'
 
 export default class NotFound extends Component {
   componentDidMount(): void {

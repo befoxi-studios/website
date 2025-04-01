@@ -1,3 +1,5 @@
+import type { MDXComponents, MDXContent } from '@/types/mdx'
+
 export type v1 = {
   version: number
   file: {
@@ -13,8 +15,7 @@ export type v1 = {
   }
 }
 
-type MDXContent = React.ComponentType<any> | null
-type ModuleType = { content?: React.SetStateAction<MDXContent>, variables?: MetadataVariable}
+export type ModuleType = { content?: React.SetStateAction<MDXContent>, variables?: MetadataVariable}
 
 export interface Metadata {
   name: string
@@ -30,4 +31,16 @@ export type MetadataVariable = {
   icon?: string
   preview?: string
   [key: string]: any
+}
+
+export interface PostFrameProps {
+  /** @deprecated */
+  components?: MDXComponents
+  uri: string
+  onError?: () => any
+}
+
+export interface PostHeadProps extends React.HTMLAttributes<HTMLElement> {
+  meta: Metadata | null
+  delay?: number
 }

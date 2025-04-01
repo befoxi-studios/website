@@ -1,8 +1,4 @@
-interface BackgroundProps {
-  scrollProgress: number
-}
-
-const Background = ({ scrollProgress }: BackgroundProps) => {
+const Background = ({ scrollProgress }: { scrollProgress: number }) => {
   return (
     <div class='absolute inset-0 flex items-center justify-center pointer-events-none'>
       <span

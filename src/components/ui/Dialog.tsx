@@ -1,36 +1,11 @@
-import { ComponentChild, ComponentChildren } from 'preact'
 import { AnimatePresence, motion } from 'motion/react'
 import { XIcon } from 'lucide-preact'
 import { cn } from '@/utils/cn'
-import type { DefineClass } from '@/types/define-class'
-
-const elementGetter = (match: string, children: ComponentChildren) => {
-  const child = children as ComponentChild[]
-
-  if (child.find) {
-    const matchedElement = child.find(elem => {
-      const element = (elem as DefineClass)
-
-      if (!element) return undefined
-      if (element.type.name === match) {
-        return elem
-      }
-    })
-    return [matchedElement, ...child.filter(e => e !== matchedElement)]
-  }
-  return [, child]
-}
+import { elementGetter } from '@/utils/element-getter'
+import type { DialogProps } from '@/types/dialog'
 
 export const DialogHeader = ({ children }: React.HTMLAttributes<HTMLElement>) => {
-  return (
-    <>{children}</>
-  )
-}
-
-interface DialogProps {
-  open?: boolean
-  stateChanged?: (state: boolean) => any
-  children?: ComponentChild | ComponentChild[]
+  return (<>{children}</>)
 }
 
 const Dialog = ({ open = true, stateChanged, children }: DialogProps) => {

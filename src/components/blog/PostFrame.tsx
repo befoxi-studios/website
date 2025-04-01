@@ -4,18 +4,10 @@ import { useEffect, useState } from 'preact/hooks'
 import { MDXProvider } from '@mdx-js/preact'
 import { cn } from '@/utils/cn'
 import { getPost } from '@/hooks/useBlog'
-import type { MDXComponents } from '@/types/mdx-components'
-import type { ModuleType, MDXContent, MetadataVariable } from '@/types/blog'
-import PostBody from '@/components/PostBody'
+import PostBody from '@/components/blog/PostBody'
+import type { ModuleType, MDXContent, MetadataVariable, PostFrameProps } from '@/types/blog'
 
-interface PostProps {
-  /** @deprecated */
-  components?: MDXComponents
-  uri: string
-  onError?: () => any
-}
-
-const Post = ({ components, uri, onError }: PostProps) => {
+const PostFrame = ({ components, uri, onError }: PostFrameProps) => {
   const [mdxContent, setMDXContent] = useState<MDXContent>(null)
   const [metadataVariable, setMetadataVariable] = useState<MetadataVariable | undefined>()
   const [alternateComponent, setAlternateComponent] = useState<ReactElement<HTMLElement> | null>(null)
@@ -47,7 +39,7 @@ const Post = ({ components, uri, onError }: PostProps) => {
     <PostBody>
       <MDXProvider components={components}>
         <div className='relative md'>
-          <div class='flex flex-col gap-0.5 px-4 backdrop-blur-xl backdrop-brightness-95'>
+          <div class='flex flex-col gap-0.5 px-4 backdrop-blur-xl'>
             <div class='flex flex-row items-center gap-2 pt-3 pb-2 text-xs font-thin'>
               <div class={cn`
                 flex flex-row items-center gap-1 px-1 w-fit bg-neutral-100/8
@@ -74,4 +66,4 @@ const Post = ({ components, uri, onError }: PostProps) => {
   ))
 }
 
-export default Post
+export default PostFrame
