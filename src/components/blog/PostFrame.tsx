@@ -5,7 +5,8 @@ import { MDXProvider } from '@mdx-js/preact'
 import { cn } from '@/utils/cn'
 import { getPost } from '@/hooks/useBlog'
 import PostBody from '@/components/blog/PostBody'
-import type { ModuleType, MDXContent, MetadataVariable, PostFrameProps } from '@/types/blog'
+import type { ModuleType, MetadataVariable, PostFrameProps } from '@/types/blog'
+import type { MDXContent } from '@/types/mdx'
 
 const PostFrame = ({ components, uri, onError }: PostFrameProps) => {
   const [mdxContent, setMDXContent] = useState<MDXContent>(null)
