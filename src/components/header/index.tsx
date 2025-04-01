@@ -9,7 +9,10 @@ import type { HeaderProps } from '@/types/header'
 const Items = () => {
   return (
     <div class='hidden md:flex items-center justify-end gap-6 text-neutral-50/50'>
-      <RouteLinks className='hover:text-neutral-50/75 transition-colors duration-150' />
+      <RouteLinks
+        exclude={['about us']}
+        className='hover:text-neutral-50/75 transition-colors duration-150'
+      />
       <a target='_blank'
         href='https://github.com/befoxi-studios'
         class={cn`
