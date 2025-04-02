@@ -7,3 +7,6 @@
 [submodule "src/submodules/roadmap"]
 	path = src/submodules/roadmap
 	url = https://github.com/befoxi-studios/roadmap-functions.git
+[submodule "src/submodules/i18n"]
+	path = src/submodules/i18n
+	url = https://github.com/befoxi-studios/i18n-functions.git
