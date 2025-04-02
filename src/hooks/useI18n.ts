@@ -20,16 +20,12 @@ const getLoader = (load: string[] | null | undefined, code: string) => {
   return flatLoader
 }
 
-const getTranslate = (props: I18nSetType, key: string, defaultValue?: string, useLog: boolean = false): string | undefined => {
+const getTranslate = (props: I18nSetType | undefined, key: string, defaultValue?: string, useLog: boolean = false): string | undefined => {
+  if (!props) return defaultValue
+  
   const prop = props[key]
-  if (useLog) {
-    console.log(`[be:i18n/t] { input: ${key}, output: ${prop || defaultValue || '""'} }`)
-  }
-  if (prop) {
-    return prop
-  } else {
-    return defaultValue
-  }
+  if (useLog) console.log(`[be:i18n/t] { input: ${key}, output: ${prop || defaultValue || '""'} }`)
+  return prop || defaultValue
 }
 
 export const useI18n = () => {
@@ -54,9 +50,9 @@ export const useI18n = () => {
   return {
     datas,
     /** @example t("hello", "Hello World!") */
-    t: (key: string, defaultValue?: string) => getTranslate(props.set!, key, defaultValue),
+    t: (key: string, defaultValue?: string) => getTranslate(props.set, key, defaultValue),
     /** @description for debuging */
-    td: (key: string, defaultValue?: string) => getTranslate(props.set!, key, defaultValue, true),
+    td: (key: string, defaultValue?: string) => getTranslate(props.set, key, defaultValue, true),
     currentLanguage: langCode,
     setLanguage: setLanguageCode,
   }
