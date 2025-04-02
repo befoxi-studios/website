@@ -47,13 +47,23 @@ export const useI18n = () => {
   })
   const props = datas.filter(({ 'lang-code': locale }) => langCode === locale)[0]
 
-  return {
-    datas,
-    /** @example t("hello", "Hello World!") */
-    t: (key: string, defaultValue?: string) => getTranslate(props.set, key, defaultValue),
-    /** @description for debuging */
-    td: (key: string, defaultValue?: string) => getTranslate(props.set, key, defaultValue, true),
-    currentLanguage: langCode,
-    setLanguage: setLanguageCode,
+  if (props) {
+    return {
+      datas,
+      /** @example t("hello", "Hello World!") */
+      t: (key: string, defaultValue?: string) => getTranslate(props.set, key, defaultValue),
+      /** @description for debuging */
+      td: (key: string, defaultValue?: string) => getTranslate(props.set, key, defaultValue, true),
+      currentLanguage: langCode,
+      setLanguage: setLanguageCode,
+    }
+  } else {
+    return {
+      datas,
+      t: (_key: string, defaultValue?: string) => (defaultValue),
+      td: (_key: string, defaultValue?: string) => (defaultValue),
+      currentLanguage: langCode,
+      setLanguage: setLanguageCode,
+    }
   }
 }
