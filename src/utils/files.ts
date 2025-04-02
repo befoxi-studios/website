@@ -4,5 +4,3 @@ export const FILES_OF_BLOG = import.meta.glob(`../submodules/blog/*/*.md(x)?`)
 export const FILES_OF_BLOG_INDEX = import.meta.glob(`../submodules/blog/*/index.{md,mdx}`, { eager: true })
 export const FILES_OF_BLOG_README = import.meta.glob(`../submodules/blog/README(_*)?.md(x)?`)
 export const FILES_OF_BLOG_CONFIG = import.meta.glob(`../submodules/blog/.conf.toml`)
-
-export const FILES_OF_TRIGGER = import.meta.glob(`../submodules/trigger/**/*.yml`, { eager: true })
