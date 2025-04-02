@@ -1,8 +1,11 @@
 import { FILES_OF_ROUTES } from '@/utils/files'
 import { DefineReference } from '@/types/define-class'
 import { cn } from '@/utils/cn'
+import { useI18n } from '@/hooks/useI18n'
 
 const RouteLinks = ({ className, exclude }: React.HTMLAttributes<HTMLElement> & { exclude?: string[] }) => {
+  const { t } = useI18n()
+
   const includeReference = (classComponent: any) => {
     const component = new classComponent() as DefineReference
     if (component.name && component.path) {
@@ -30,7 +33,10 @@ const RouteLinks = ({ className, exclude }: React.HTMLAttributes<HTMLElement> & 
         href={def?.path}
         class={cn`${className}`}
       >
-        {def?.name}
+        {t(
+          'routes.' + def?.name!.toLowerCase().replace(/\s/g, '-')!, // {namespace}.{key}
+          def?.name!,
+        )}
       </a>
     ))
   )

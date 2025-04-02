@@ -8,16 +8,21 @@ import Header from '@/components/header'
 import Background from '@/components/Background'
 import SectionWrapper from '@/components/SectionWrapper'
 import Footer from '@/templates/footer'
+import { useI18n } from '@/hooks/useI18n'
 
 export default class HomeRoute extends Component {
   componentDidMount(): void {
     document.title = 'Befoxi Studios'
   }
   render() {
+    const { t } = useI18n()
     const [scrollProgress, setScrollProgress] = useState(0)
 
     return (
-      <div class='grid grid-rows-[60px_1fr_60px] w-full h-svh font-noto-sans overflow-hidden touch-none'>
+      <div class={cn`
+        grid grid-rows-[60px_1fr_60px] w-full h-svh
+        font-noto-sans text-balance overflow-hidden touch-none
+      `}>
         <Loading from='top' />
         <Background scrollProgress={scrollProgress} />
         <Header menu={['logo', 'search', 'items']} />
@@ -27,7 +32,9 @@ export default class HomeRoute extends Component {
             text-black text-sm font-mono tracking-tight overflow-hidden select-none z-15
           `}
         >
-          <span class='sticky top-0 py-1'>This site is still under construction!</span>
+          <span class='sticky top-0 py-1'>
+            {t('alert.construction', 'This site is still under construction!')}
+          </span>
         </div>
         <ScrollView
           indicator={({ elevator, scrollTo }) => (
@@ -47,25 +54,34 @@ export default class HomeRoute extends Component {
           <SectionWrapper className='items-center'>
             <div class='mx-12 w-full sm:w-lg max-w-none sm:max-w-lg lg:max-w-3xl text-center'>
               <div class='flex flex-col items-center justify-center gap-[1.75rem] font-light'>
-                <span class='text-[27pt] font-bold opacity-95'>Welcome to Befoxi Studios!</span>
+                <span
+                  class='text-[27pt] font-bold opacity-95'
+                  dangerouslySetInnerHTML={{
+                    __html: t('home.welcome', 'Welcome to Befoxi Studios!')!
+                      .split('<>').join('<br/>')
+                  }}
+                ></span>
               </div>
             </div>
           </SectionWrapper>
           <SectionWrapper className='items-center'>
             <div class='mx-12 w-full sm:w-lg max-w-none sm:max-w-lg lg:max-w-3xl text-center'>
-              <div class='flex flex-col items-center justify-center font-light'>
-                <span class='text-on-background/95 text-center'>
-                  We are a game development studio that brings new experiences to players based on creative games and original worldviews.
-                </span>
-                <br/>
-                <span class='text-on-background/95 text-center'>
-                  In <a href='/blog' class='text-rose-400 hover:underline underline-offset-2'>Blog</a>,
-                  we will share various <b class='text-on-background'>news</b>, <b class='text-on-background'>updates</b>, <b class='text-on-background'>events</b>, and <b class='text-on-background'>developer strategy guide</b>.
-                </span>
-                <span class='text-on-background/95 text-center'>
-                  It will be updated from the progress of new development to new patch notes.
-                </span>
-              </div>
+              <div
+                class={cn`
+                  flex flex-col items-center justify-center font-light
+                  [&>span]:text-on-background/95 [&>span]:text-center
+                  [&_a]:text-rose-400 [&_a]:hover:underline [&_a]:underline-offset-2
+                  [&_b]:text-on-background
+                `}
+                dangerouslySetInnerHTML={{
+                  __html: t(
+                    'home.about',
+                    `We are a game development studio that brings new experiences to players based on creative games and original worldviews.
+                    <> <br/> In <a href='/blog'>Blog</a>, we will share various <b>news</b>, <b>updates</b>, <b>events</b>, and <b>developer strategy guide</b>.
+                    It will be updated from the progress of new development to new patch notes.`
+                  )!.split('<>').map(msg => `<span>${msg}</span>`).join('')
+                }}
+              ></div>
             </div>
           </SectionWrapper>
           <SectionWrapper className={cn`

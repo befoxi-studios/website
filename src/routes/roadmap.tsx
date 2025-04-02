@@ -15,7 +15,8 @@ export default class RoadmapRoute extends Component {
     return (
       <div class={cn`
         grid grid-rows-[60px_1fr] w-full h-svh
-        bg-linear-to-b from-transparent to-violet-950/5 font-noto-sans overflow-hidden touch-none
+        bg-linear-to-b from-transparent to-violet-950/5
+        font-noto-sans text-balance overflow-hidden touch-none
       `}>
         <Loading from='top' />
         <Header menu={['logo', 'search']} />

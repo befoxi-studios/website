@@ -2,9 +2,11 @@ import { useEffect } from 'preact/hooks'
 import { SearchIcon } from 'lucide-preact'
 import { useGlobal } from '@/hooks/useGlobal'
 import { cn } from '@/utils/cn'
+import { useI18n } from '@/hooks/useI18n'
 
 const SearchBar = () => {
   const { isSearchOpen, changeSearchState } = useGlobal()
+  const { t } = useI18n()
 
   const handleKeydown = (event: KeyboardEvent) => {
     const key = event.key || event.code
@@ -37,7 +39,9 @@ const SearchBar = () => {
         onClick={() => changeSearchState(true)}
       >
         <SearchIcon width={16} height={16} />
-        <span class='text-xs truncate'>Type [/] to search</span>
+        <span class='text-xs truncate'>
+          {t('header.search.placeholder', 'Type [/] to search')}
+        </span>
       </button>
     </div>
   )

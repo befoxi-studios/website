@@ -1,6 +1,7 @@
 import '@/styles/fonts.css'
 import { useEffect } from 'preact/hooks'
 import { Router, Route, LocationProvider, ErrorBoundary, lazy } from 'preact-iso'
+import { useGlobal } from '@/hooks/useGlobal'
 
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -16,9 +17,21 @@ const Roadmap = lazy(() => import('../routes/roadmap'))
 const NotFound = lazy(() => import('../routes/_404'))
 
 export function App() {
+  const { langCode, setLanguageCode } = useGlobal()
+
   useEffect(() => {
     globalThis.dayjs = dayjs
+
+    if (window && document) {
+      setLanguageCode(window.document.documentElement.lang)
+    }
   }, [])
+
+  useEffect(() => {
+    if (window && document) {
+      window.document.documentElement.lang = langCode
+    }
+  }, [langCode])
 
   return (
     <LocationProvider>

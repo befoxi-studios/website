@@ -9,41 +9,27 @@ import SearchIndex from '@/components/search/SearchIndex'
 import searchCustom from '@/submodules/search/set/custom'
 import searchProps from '@/submodules/search/set/props'
 import type { SearchResult } from '@/submodules/search/set/type'
+import { useI18n } from '@/hooks/useI18n'
 
 const SearchDialog = () => {
   const location = useLocation()
   const { isSearchOpen, changeSearchState } = useGlobal()
+  const { t, td } = useI18n()
   const { results: searchResults, search } = useSearch(searchCustom)
   const [variableInputValue, setVariableInputValue] = useState<string | undefined>()
   const inputRef = useRef<HTMLInputElement | null>(null)
 
-  const handleInput = (event: InputEvent) => {
-    const input = event.currentTarget as HTMLInputElement
-    if (input) {
-      search(input.value)
-    }
-  }
-
-  const handleKeydown = (event: KeyboardEvent) => {
-    const key = (event.key || event.code).toLowerCase()
-
-    if (key === '/') {
-      const input = inputRef.current
-
-      if (input && input !== document.activeElement) {
-        event.preventDefault()
-        input.focus()
-      }
-    }
-    if (key === 'enter') {
-      const currentElem = document.activeElement as HTMLElement
-      if (currentElem.click) {
-        currentElem.click()
-      }
-    }
-    if (key === 'escape') {
-      changeSearchState(false)
-    }
+  const indexingSearchResults = (res: SearchResult | undefined) => {
+    return SearchIndex(res, {
+      value: inputRef.current?.value,
+      search: (value: string) => {
+        if (inputRef.current) {
+          setVariableInputValue(value)
+        }
+      },
+      translate: t,
+      logTranslate: td,
+    })
   }
 
   const sortSearchResult = (a: SearchResult | undefined, b: SearchResult | undefined) => {
@@ -77,15 +63,33 @@ const SearchDialog = () => {
     return 0
   }
 
-  const indexingSearchResults = (res: SearchResult | undefined) => {
-    return SearchIndex(res, {
-      value: inputRef.current?.value,
-      search: (value: string) => {
-        if (inputRef.current) {
-          setVariableInputValue(value)
-        }
-      },
-    })
+  const handleInput = (event: InputEvent) => {
+    const input = event.currentTarget as HTMLInputElement
+    if (input) {
+      search(input.value)
+    }
+  }
+
+  const handleKeydown = (event: KeyboardEvent) => {
+    const key = (event.key || event.code).toLowerCase()
+
+    if (key === '/') {
+      const input = inputRef.current
+
+      if (input && input !== document.activeElement) {
+        event.preventDefault()
+        input.focus()
+      }
+    }
+    if (key === 'enter') {
+      const currentElem = document.activeElement as HTMLElement
+      if (currentElem.click) {
+        currentElem.click()
+      }
+    }
+    if (key === 'escape') {
+      changeSearchState(false)
+    }
   }
 
   useEffect(() => {
@@ -132,7 +136,7 @@ const SearchDialog = () => {
         <input
           ref={inputRef}
           class='w-full bg-transparent text-neutral-50 outline-0 text-sm font-normal'
-          placeholder='Search'
+          placeholder={t('header.search', 'Search')}
           onInput={handleInput}
         />
       </DialogHeader>
