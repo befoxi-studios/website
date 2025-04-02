@@ -1,5 +1,6 @@
 import { Component } from 'preact'
 import { useState } from 'preact/hooks'
+import { cn } from '@/utils/cn'
 import Loading from '@/components/ui/Loading'
 import Indicator from '@/components/ui/ScrollIndicator'
 import ScrollView from '@/components/ui/ScrollView'
@@ -20,8 +21,15 @@ export default class HomeRoute extends Component {
         <Loading from='top' />
         <Background scrollProgress={scrollProgress} />
         <Header menu={['logo', 'search', 'items']} />
+        <div
+          class={cn`
+            absolute inset-x-0 top-[3.75rem] flex justify-center bg-rose-400
+            text-black text-sm font-mono tracking-tight overflow-hidden select-none z-15
+          `}
+        >
+          <span class='sticky top-0 py-1'>This site is still under construction!</span>
+        </div>
         <ScrollView
-          page={3}
           indicator={({ elevator, scrollTo }) => (
             <Indicator
               direction='col'
@@ -60,7 +68,10 @@ export default class HomeRoute extends Component {
               </div>
             </div>
           </SectionWrapper>
-          <SectionWrapper className='bg-neutral-50/1 border-t border-t-neutral-50/3 rounded-t-xl backdrop-blur-3xl'>
+          <SectionWrapper className={cn`
+            bg-neutral-50/1 border-t border-t-neutral-50/3 backdrop-blur-3xl transition-all z-20
+            ${scrollProgress === 100 ? 'rounded-t-none' : 'rounded-t-xl'}
+          `}>
             <Footer className='mx-16 sm:mx-none w-full max-w-none sm:max-w-lg lg:max-w-3xl' />
           </SectionWrapper>
         </ScrollView>

@@ -7,6 +7,7 @@ export type ScrollIndicatorType = {
 export interface ScrollViewProps extends React.HTMLAttributes<HTMLElement> {
   /** @deprecated static-value: 100 */
   max?: number
+  /** @deprecated number of children */
   page?: number
   indicator?: ({ elevator, scrollTo }: ScrollIndicatorType) => React.HTMLAttributes<HTMLElement>
   onScrollChange?: (progress: number) => void

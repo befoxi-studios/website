@@ -5,9 +5,12 @@ import { cn } from '@/utils/cn'
 import { useGlobal } from '@/hooks/useGlobal'
 import { useScroll } from '@/hooks/useScroll'
 import type { ScrollViewProps } from '@/types/scroll'
-import ViewByNumberOfChildren from '@/components/ViewByNumberOfChildren'
+import type { DefineClass } from '@/types/define-class'
 
 const ScrollView = ({ max = 100, page = 5, indicator, onScrollChange, children }: ScrollViewProps) => {
+  const pageChildren = children as ComponentChild[]
+  page = pageChildren.length
+
   const { isSearchOpen } = useGlobal()
   const { progress, current, touch, to } = useScroll(max, page)
 
@@ -63,19 +66,24 @@ const ScrollView = ({ max = 100, page = 5, indicator, onScrollChange, children }
         scrollTo: (index) => to(index),
       })
     )}
-    {Array(page).fill(0).map((_, i) => (
-      <section
-        className={cn`
-          col-start-1 row-start-2 last:row-end-4 flex items-center justify-center
-          h-[calc(100dvh-(60px*2))] last:h-[calc(100dvh-60px)] transition-[transform] duration-500
-        `}
-        style={{ transform: `translateY(${dragReaction(i, 7)}dvh)` }}
-      >
-        <ViewByNumberOfChildren index={i}>
-          {children}
-        </ViewByNumberOfChildren>
-      </section>
-    ))}
+    {pageChildren.map((elem, index) => {
+      const node = elem as DefineClass
+      const props = node.props
+
+      return (
+        <section
+          key={index}
+          className={cn`
+            col-start-1 row-start-2 last:row-end-4 flex justify-center
+            h-[calc(100dvh-(60px*2))] last:h-[calc(100dvh-60px)] transition-[transform] duration-500
+            ${props.className}
+          `}
+          style={{ transform: `translateY(${dragReaction(index, 7)}dvh)` }}
+        >
+          {props.children}
+        </section>
+      )
+    })}
   </>)
 }
 
