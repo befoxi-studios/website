@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn'
 import { useI18n } from '@/hooks/useI18n'
 import RouteLinks from '@/components/ui/RouteLinks'
 
-const LanguageDropdown = () => {
+const LanguageSelect = () => {
   const { datas, currentLanguage, setLanguage } = useI18n()
 
   if (datas.length) {
@@ -87,7 +87,7 @@ const Footer = ({ className }: React.HTMLAttributes<HTMLElement>) => {
             {/* <span>:Social Network Services</span> */}
           </div>
         </div>
-        <LanguageDropdown />
+        <LanguageSelect />
       </div>
     </div>
   )
