@@ -5,32 +5,34 @@ import RouteLinks from '@/components/ui/RouteLinks'
 const LanguageDropdown = () => {
   const { datas, currentLanguage, setLanguage } = useI18n()
 
-  return (
-    <div class={cn`
-      flex flex-col items-start gap-1 p-2 pr-0 w-fit min-w-[8rem]
-      bg-neutral-950/35 border border-neutral-800 rounded-md overflow-hidden
-    `}>
-      {datas.map(({ 'lang-code': locale, langset }) => (
-        <button
-          disabled={currentLanguage === locale}
-          class={cn`
-            group/lang
-            flex flex-row items-center gap-1.5 -ml-2.75 w-[calc(100%+0.2rem)]
-            cursor-pointer disabled:pointer-events-none
-          `}
-          onClick={() => locale && setLanguage(locale)}
-        >
-          <div class={cn`
-            w-1.5 h-3 bg-neutral-500 rounded-xs transition-opacity
-            ${currentLanguage === locale ? 'opacity-100' : 'opacity-0'}`
-          }></div>
-          <span class='flex w-full p-1 group-hover/lang:bg-neutral-800/30 rounded transition-all'>
-            {langset}
-          </span>
-        </button>
-      ))}
-    </div>
-  )
+  if (datas.length) {
+    return (
+      <div class={cn`
+        flex flex-col items-start gap-1 p-2 pr-0 w-fit min-w-[8rem]
+        bg-neutral-950/35 border border-neutral-800 rounded-md overflow-hidden
+      `}>
+        {datas.map(({ 'lang-code': locale, langset }) => (
+          <button
+            disabled={currentLanguage === locale}
+            class={cn`
+              group/lang
+              flex flex-row items-center gap-1.5 -ml-2.75 w-[calc(100%+0.2rem)]
+              cursor-pointer disabled:pointer-events-none
+            `}
+            onClick={() => locale && setLanguage(locale)}
+          >
+            <div class={cn`
+              w-1.5 h-3 bg-neutral-500 rounded-xs transition-opacity
+              ${currentLanguage === locale ? 'opacity-100' : 'opacity-0'}`
+            }></div>
+            <span class='flex w-full p-1 group-hover/lang:bg-neutral-800/30 rounded transition-all'>
+              {langset}
+            </span>
+          </button>
+        ))}
+      </div>
+    )
+  }
 }
 
 const Footer = ({ className }: React.HTMLAttributes<HTMLElement>) => {
