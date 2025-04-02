@@ -6,8 +6,6 @@ interface StorageReference {
 }
 
 const storage = (type: Storage, name: string): StorageReference => {
-  console.log(type)
-
   return {
     set(key, value) {
       type.setItem(key, value)
