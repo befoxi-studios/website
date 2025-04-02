@@ -2,6 +2,7 @@ import '@/styles/fonts.css'
 import { useEffect } from 'preact/hooks'
 import { Router, Route, LocationProvider, ErrorBoundary, lazy } from 'preact-iso'
 import { useGlobal } from '@/hooks/useGlobal'
+import { local } from '@/utils/storage'
 
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -23,13 +24,16 @@ export function App() {
     globalThis.dayjs = dayjs
 
     if (window && document) {
-      setLanguageCode(window.document.documentElement.lang)
+      const defaultLocale = window.document.documentElement.lang
+      const localLocale = local.get('user-locale')
+      setLanguageCode(localLocale || defaultLocale)
     }
   }, [])
 
   useEffect(() => {
     if (window && document) {
       window.document.documentElement.lang = langCode
+      local.set('user-locale', langCode)
     }
   }, [langCode])
 
