@@ -33,8 +33,8 @@ const getConfig = async () => {
 
 export const getPost = async (uri: string, countryCode?: string) => {
   const { file: { index } }: v1 = await getConfig()
-  const indexFileRegex = new RegExp(`\.\.\/submodules${uri}\/${index}.mdx?`)
-  const internalFileRegex = new RegExp(`\.\.\/submodules${uri}\/${countryCode}.mdx?`)
+  const indexFileRegex = new RegExp(`\.{2}\/submodules${uri}\/${index}.mdx?`)
+  const internalFileRegex = new RegExp(`\.{2}\/submodules${uri}\/${countryCode}.mdx?`)
 
   const filePath = Object.keys(FILES_OF_BLOG).find(t => {
     if (countryCode) {
@@ -59,7 +59,7 @@ export const getPost = async (uri: string, countryCode?: string) => {
 
 export const getAllDir = async () => {
   const { file: { index } }: v1 = await getConfig()
-  const fileRegex = new RegExp(`^((\.\.\/submodules\/blog\/)([a-zA-Z0-9_-]+)\/)(${index}(\.mdx?))$`)
+  const fileRegex = new RegExp(`^((\.{2}\/submodules\/blog\/)([a-zA-Z0-9_-]+)\/)(${index}(\.mdx?))$`)
   const indexedFiles = Object.keys(FILES_OF_BLOG).filter(path => fileRegex.test(path))
   const selectedFiles: { [key: string]: Promise<any> } = {}
 
@@ -81,7 +81,7 @@ export const getReadme = async (countryCode?: string) => {
 }
 
 export const fetchBlogMetadata = async () => {
-  const fileRegex = new RegExp(`^((\.\.\/submodules\/blog\/)([a-zA-Z0-9_-]+)\/)(([a-zA-Z0-9_-]+)(\.mdx?))$`)
+  const fileRegex = new RegExp(`^((\.{2}\/submodules\/blog\/)([a-zA-Z0-9_-]+)\/)(([a-zA-Z0-9_-]+)(\.mdx?))$`)
 
   const promisedDir = await getAllDir()
   const dirs = Object.keys(promisedDir)
