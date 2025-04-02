@@ -47,8 +47,10 @@ const queryBlog = (query: string): (SearchResult | undefined)[] => {
 
 const queryCustom = (custom: SearchResult[] | undefined, query: string): (SearchResult | undefined)[] => {
   if (!custom) return []
+
   return (
-    custom.map(({ type, name, rules }) => {
+    custom.filter(t => t).map((res) => {
+      const { type, name, rules } = res
       const included = !!rules.filter(rule => isInclude(rule.toLowerCase(), query.toLowerCase()))[0]
       if (isAll(query) || included) {
         return { type, name, rules }
