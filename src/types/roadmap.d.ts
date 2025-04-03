@@ -1,4 +1,4 @@
-import type { RoadmapListItem, RoadmapTableItem } from '@/submodules/roadmap/set/type'
+import type { RoadmapListItem, RoadmapTableItem } from '@mod/roadmap/set/type'
 
 export interface RoadmapListProps {
   tableBaseColor: string

@@ -10,23 +10,26 @@ const parseFile = (imported: Record<string, unknown>) => {
     .map(([path, mod]: [path: string, mod: any]) => ([path, mod]))
 }
 
-const getLoader = (load: string[] | null | undefined, code: string) => {
+export const getLoader = (files: Record<string, unknown>, load: string[] | null | undefined, code: string) => {
   const loaders = load?.flatMap(loadName => {
-    const loaderRegex = new RegExp(`../submodules/i18n/${code}/${loadName}`)
-    const loader = Object.entries(FILES_OF_I18N).filter(([path]) => loaderRegex.test(path))
+    const loaderRegex = new RegExp(`/${code}/${loadName}$`)
+    const loader = Object.entries(files).filter(([path]) => loaderRegex.test(path))
     return loader.map(([_, mod]: [path: string, mod: any]) => mod.default)
   })
-  const flatLoader = loaders?.reduce((acc, cur) => ({ ...acc, ...cur }), {})
-  return flatLoader
+  if (loaders && loaders.length) {
+    const flatLoader = loaders.reduce((acc, cur) => ({ ...acc, ...cur }), {})
+    return flatLoader
+  }
 }
 
 const getTranslate = (props: I18nSetType | undefined, key: string, defaultValue?: string, useLog: boolean = false): string | undefined => {
   if (!props) return defaultValue
-  
   const prop = props[key]
   if (useLog) console.log(`[be:i18n/t] { input: ${key}, output: ${prop || defaultValue || '""'} }`)
   return prop || defaultValue
 }
+
+export const t = getTranslate
 
 export const useI18n = () => {
   const { langCode, setLanguageCode } = useGlobal()
@@ -40,8 +43,8 @@ export const useI18n = () => {
       'lang-code': locale,
       langset: data.langset,
       set: {
-        ...getLoader(load, locale),
         ...data.set,
+        ...getLoader(FILES_OF_I18N, load, locale),
       }
     }
   })

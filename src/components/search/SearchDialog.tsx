@@ -1,67 +1,37 @@
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { useLocation } from 'preact-iso'
 import { SearchIcon } from 'lucide-preact'
+import { useI18n } from '@/hooks/useI18n'
 import { useGlobal } from '@/hooks/useGlobal'
-import { useSearch } from '@/hooks/useSearch'
-import getNameByPath from '@/utils/get-name-by-path'
+import { bus } from '@/utils/event-bus'
 import Dialog, { DialogHeader } from '@/components/ui/Dialog'
 import SearchIndex from '@/components/search/SearchIndex'
-import searchCustom from '@/submodules/search/set/custom'
-import searchProps from '@/submodules/search/set/props'
-import type { SearchResult } from '@/submodules/search/set/type'
-import { useI18n } from '@/hooks/useI18n'
+import { useSearch } from '@mod/search/src/useSearch'
+import type { SearchModule } from '@mod/search/src/type'
+
+const sortSearchResult = (a: SearchModule | undefined, b: SearchModule | undefined) => {
+  if (a && b) {
+    const aIsAt = a.call.startsWith('@')
+    const bIsAt = b.call.startsWith('@')
+
+    if (aIsAt && !bIsAt) return -1
+    if (!aIsAt && bIsAt) return 1
+
+    const typeCompare = a.call.localeCompare(b.call)
+    if (typeCompare !== 0) return typeCompare
+    return a.name.localeCompare(b.name)
+  }
+
+  return 0
+}
 
 const SearchDialog = () => {
   const location = useLocation()
+  const { t } = useI18n()
   const { isSearchOpen, changeSearchState } = useGlobal()
-  const { t, td } = useI18n()
-  const { results: searchResults, search } = useSearch(searchCustom)
+  const { results: searchResults, search } = useSearch()
   const [variableInputValue, setVariableInputValue] = useState<string | undefined>()
   const inputRef = useRef<HTMLInputElement | null>(null)
-
-  const indexingSearchResults = (res: SearchResult | undefined) => {
-    return SearchIndex(res, {
-      value: inputRef.current?.value,
-      search: (value: string) => {
-        if (inputRef.current) {
-          setVariableInputValue(value)
-        }
-      },
-      translate: t,
-      logTranslate: td,
-    })
-  }
-
-  const sortSearchResult = (a: SearchResult | undefined, b: SearchResult | undefined) => {
-    if (a && b) {
-      if (a.type === undefined) return 1
-      if (b.type === undefined) return -1
-
-      const aIsAt = a.type.startsWith('@')
-      const bIsAt = b.type.startsWith('@')
-
-      if (aIsAt && !bIsAt) return -1
-      if (!aIsAt && bIsAt) return 1
-
-      const typeCompare = a.type.localeCompare(b.type)
-      if (typeCompare !== 0) return typeCompare
-
-      if ((a.path || a.name) && (b.path || b.name)) {
-        const props = Object.values(searchProps)
-        const patterns = props.map(t => t.pattern) as string[]
-        
-        const aKey = getNameByPath(a.path || a.name || '', patterns)
-        const bKey = getNameByPath(b.path || b.name || '', patterns)
-        if (aKey && bKey) {
-          return aKey.localeCompare(bKey)
-        }
-      }
-
-      return a.type.localeCompare(b.type)
-    }
-
-    return 0
-  }
 
   const handleInput = (event: InputEvent) => {
     const input = event.currentTarget as HTMLInputElement
@@ -122,13 +92,20 @@ const SearchDialog = () => {
     }
   }, [variableInputValue])
 
+  useEffect(() => {
+    const searchEvent = bus.onChannel('search', setVariableInputValue)
+    return () => {
+      searchEvent()
+    }
+  }, [])
+
   return (
     <Dialog open={isSearchOpen} stateChanged={changeSearchState}>
       {!!searchResults.length && (<>
         <div
-          class='flex flex-col p-1 h-full max-h-none sm:max-h-[16em] text-sm overflow-auto'
+          class='flex flex-col gap-0.5 p-1 h-full max-h-none sm:max-h-[16em] text-sm overflow-auto'
         >
-          {searchResults.sort(sortSearchResult).map(indexingSearchResults)}
+          {searchResults.sort(sortSearchResult).map(SearchIndex)}
         </div>
       </>)}
       <DialogHeader>

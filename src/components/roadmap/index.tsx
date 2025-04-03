@@ -4,8 +4,8 @@ import { cn } from '@/utils/cn'
 import RoadmapTab from '@/components/roadmap/RoadmapTab'
 import RoadmapTable from '@/components/roadmap/RoadmapTable'
 import RoadmapContent from '@/components/roadmap/RoadmapContent'
-import roadmapItems from '@/submodules/roadmap/set/items'
-import type { RoadmapItem } from '@/submodules/roadmap/set/type'
+import roadmapItems from '@mod/roadmap/set/items'
+import type { RoadmapItem } from '@mod/roadmap/set/type'
 
 const Roadmap = () => {
   const [items] = useState(roadmapItems.filter(t => t))

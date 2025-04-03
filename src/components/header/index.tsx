@@ -1,10 +1,13 @@
+import { useEffect } from 'preact/hooks'
 import { cn } from '@/utils/cn'
+import { bus } from '@/utils/event-bus'
 import Logo from '@/components/header/Logo'
 import SearchBar from '@/components/search/SearchBar'
 import SearchDialog from '@/components/search/SearchDialog'
 import GithubIcon from '@/components/icons/GithubIcon'
 import RouteLinks from '@/components/ui/RouteLinks'
 import type { HeaderProps } from '@/types/header'
+import { useLocation } from 'preact-iso'
 
 const Items = () => {
   return (
@@ -27,6 +30,15 @@ const Items = () => {
 }
 
 const Header = ({ menu = ['logo'] }: HeaderProps) => {
+  const { route } = useLocation()
+  
+  useEffect(() => {
+    const navigateEvent = bus.onChannel('navigate', route)
+    return () => {
+      navigateEvent()
+    }
+  }, [])
+
   return (<>
     <header class='flex md:grid grid-cols-3 items-center justify-between px-4 backdrop-blur-lg z-10'>
       {menu.includes('logo') ? (<Logo />) : <div class='pointer-events-none'></div>}

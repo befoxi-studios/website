@@ -3,6 +3,7 @@ import { useEffect } from 'preact/hooks'
 import { Router, Route, LocationProvider, ErrorBoundary, lazy } from 'preact-iso'
 import { useGlobal } from '@/hooks/useGlobal'
 import { local } from '@/utils/storage'
+import { bus } from '@/utils/event-bus'
 
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -36,6 +37,13 @@ export function App() {
       local.set('user-locale', langCode)
     }
   }, [langCode])
+
+  useEffect(() => {
+    const changeLanguageEvent = bus.onChannel('change-language', setLanguageCode)
+    return () => {
+      changeLanguageEvent()
+    }
+  }, [])
 
   return (
     <LocationProvider>
