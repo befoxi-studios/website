@@ -11,15 +11,17 @@ import { useLocation } from 'preact-iso'
 
 const Items = () => {
   return (
-    <div class='hidden md:flex items-center justify-end gap-6 text-neutral-50/50'>
-      <RouteLinks
-        exclude={['about us']}
-        className='hover:text-neutral-50/75 transition-colors duration-150'
-      />
+    <div class='hidden md:flex items-center justify-end gap-1 text-neutral-50/50'>
+      <div class='flex flex-row-reverse gap-1'>
+        <RouteLinks
+          exclude={['about us']}
+          className='p-2 hover:text-neutral-50/75 transition-colors duration-150'
+        />
+      </div>
       <a target='_blank'
         href='https://github.com/befoxi-studios'
         class={cn`
-          mx-1 w-5 h-5 fill-neutral-50/50 hover:fill-neutral-50/75
+          p-2 mx-1 fill-neutral-50/50 hover:fill-neutral-50/75
           cursor-pointer select-none transition-colors duration-150
         `}
       >

@@ -26,16 +26,18 @@ export default class HomeRoute extends Component {
         <Loading from='top' />
         <Background scrollProgress={scrollProgress} />
         <Header menu={['logo', 'search', 'items']} />
-        <div
-          class={cn`
-            absolute inset-x-0 top-[3.75rem] flex justify-center bg-rose-400
-            text-black text-sm font-mono tracking-tight overflow-hidden select-none z-15
-          `}
-        >
-          <span class='sticky top-0 py-1'>
-            {t('alert.construction', 'This site is still under construction!')}
-          </span>
-        </div>
+        {import.meta.env.VITE_RUNTIME_MODE === 'development' && (
+          <div
+            class={cn`
+              absolute inset-x-0 top-[3.75rem] flex justify-center bg-rose-400
+              text-black text-sm font-mono tracking-tight overflow-hidden select-none z-15
+            `}
+          >
+            <span class='sticky top-0 py-1'>
+              {t('alert.construction', 'This site is still under construction!')}
+            </span>
+          </div>
+        )}
         <ScrollView
           indicator={({ elevator, scrollTo }) => (
             <Indicator

@@ -14,9 +14,6 @@ const PostFrame = ({ components, uri, onError }: PostFrameProps) => {
   const [alternateComponent, setAlternateComponent] = useState<ReactElement<HTMLElement> | null>(null)
 
   useEffect(() => {
-    // if (/^\/blog$/.test(uri)) {
-    //   getReadme().then(setMDXContent)
-    // }
     getPost(uri)
       .then(({ content, variables }: ModuleType) => {
         setMDXContent(content!)

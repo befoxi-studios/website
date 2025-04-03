@@ -9,6 +9,12 @@ const RouteLinks = ({ className, exclude }: React.HTMLAttributes<HTMLElement> & 
   const includeReference = (classComponent: any) => {
     const component = new classComponent() as DefineReference
     if (component.name && component.path) {
+      const isDevelopment = import.meta.env.VITE_RUNTIME_MODE === 'development'
+      const isPlayground = component.name.toLowerCase() === 'playground'
+
+      if (!isDevelopment && isPlayground) {
+        return
+      }
       return component
     }
     return

@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  // readonly VITE_: 
+  readonly VITE_RUNTIME_MODE: 'development' | 'production'
 }
 
 interface ImportMeta {

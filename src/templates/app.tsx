@@ -16,6 +16,7 @@ dayjs.extend(localizedFormat)
 import Home from '../routes/home'
 const Blog = lazy(() => import('../routes/blog'))
 const Roadmap = lazy(() => import('../routes/roadmap'))
+const Playground = lazy(() => import('../routes/playground'))
 const NotFound = lazy(() => import('../routes/_404'))
 
 export function App() {
@@ -54,6 +55,9 @@ export function App() {
           <Route path='/blog' component={Blog} />
           <Route path='/blog/:post' component={Blog} />
           <Route path='/roadmap' component={Roadmap} />
+          {import.meta.env.VITE_RUNTIME_MODE === 'development'
+            ? (<Route path='/playground' component={Playground} />)
+            : (<Route path='/playground' component={NotFound} />)}
           <Route default component={NotFound} />
         </Router>
       </ErrorBoundary>
