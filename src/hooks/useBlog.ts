@@ -1,5 +1,5 @@
 import { FILES_OF_BLOG, FILES_OF_BLOG_README, FILES_OF_BLOG_CONFIG } from '@/utils/files'
-import type { v1, ModuleType, Metadata, MetadataVariable } from '@/types/blog'
+import type { v1, Metadata, MetadataVariable } from '@/types/blog'
 
 const throwDoesNotExistError = () => {
   return new Error('The file cannot be found or does not exist.')
@@ -80,20 +80,21 @@ export const getReadme = async (countryCode?: string) => {
   }
 }
 
-export const fetchBlogMetadata = async () => {
+export const fetchBlogMetadata = async (countryCode?: string) => {
   const fileRegex = new RegExp(`^((\.{2}\/submodules\/blog\/)([a-zA-Z0-9_-]+)\/)(([a-zA-Z0-9_-]+)(\.mdx?))$`)
-
   const promisedDir = await getAllDir()
   const dirs = Object.keys(promisedDir)
-
+  
   const blogPosts = await Promise.all(
     dirs.map(async (t) => {
       const exec = fileRegex.exec(t)
+
       if (exec) {
-        const { variables }: ModuleType = await promisedDir[t]
+        const uri = `/blog/${exec[3]}`
+        const post = await getPost(uri, countryCode ?? 'en')
         const metadata: Metadata = {
           name: exec[3],
-          variables: variables as MetadataVariable,
+          variables: post.variables as MetadataVariable,
         }
         return metadata
       }

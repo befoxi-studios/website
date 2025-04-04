@@ -90,7 +90,7 @@
 }
 
 .md pre > code {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .md blockquote {

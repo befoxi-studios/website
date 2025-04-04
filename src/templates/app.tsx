@@ -36,6 +36,7 @@ export function App() {
     if (window && document) {
       window.document.documentElement.lang = langCode
       local.set('user-locale', langCode)
+      dayjs.locale(langCode)
     }
   }, [langCode])
 

@@ -15,7 +15,10 @@ export type v1 = {
   }
 }
 
-export type ModuleType = { content?: React.SetStateAction<MDXContent>, variables?: MetadataVariable}
+export type ModuleType = {
+  content?: React.SetStateAction<MDXContent>
+  variables?: MetadataVariable
+}
 
 export interface Metadata {
   name: string

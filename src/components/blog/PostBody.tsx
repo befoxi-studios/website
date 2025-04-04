@@ -21,7 +21,7 @@ const PostBody = ({ children }: React.HTMLAttributes<HTMLElement>) => {
       ></div>
       <div
         class={cn`
-          relative min-w-screen md:min-w-lg max-h-[43rem] bg-neutral-950 border border-neutral-200/3
+          relative w-screen md:w-lg max-h-[43rem] bg-neutral-950 border border-neutral-200/3
           rounded-none md:rounded-md overflow-auto transition-[height] duration-500 z-1
         `}
         style={{ height: isOpen ? '100%' : '0%' }}

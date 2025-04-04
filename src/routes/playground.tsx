@@ -1,10 +1,12 @@
 import { Component } from 'preact'
-import { useState } from 'preact/hooks'
+import { useMemo, useState } from 'preact/hooks'
 import { XIcon } from 'lucide-preact'
-import { MDXProvider } from '@mdx-js/preact'
+import { marked } from 'marked'
+import DOMPurity from 'dompurify'
 import { cn } from '@/utils/cn'
 import Loading from '@/components/ui/Loading'
 import Header from '@/components/header'
+
 
 export default class AboutUsRoute extends Component {
   name = 'Playground'
@@ -23,19 +25,27 @@ export default class AboutUsRoute extends Component {
     const [preview, setPreview] = useState<string>()
     const [content, setContent] = useState<string>()
 
-    const html = `
+    const previewContent = `
       ${(name || title || category || created) && '<span>---</span>'     || ''}
-      ${name && `<span>${`name: "${name}"`}</span>`                      || ''}
-      ${title && `<span>${`title: "${title}"`}</span>`                   || ''}
+      ${name        && `<span>${`name: "${name}"`}</span>`               || ''}
+      ${title       && `<span>${`title: "${title}"`}</span>`             || ''}
       ${description && `<span>${`description: "${description}"`}</span>` || ''}
-      ${category && `<span>${`category: "${category}"`}</span>`          || ''}
-      ${created && `<span>${`created: "${created}"`}</span>`             || ''}
-      ${icon && `<span>${`icon: "${icon}"`}</span>`                      || ''}
-      ${preview && `<span>${`preview: "${preview}"`}</span>`             || ''}
+      ${category    && `<span>${`category: "${category}"`}</span>`       || ''}
+      ${created     && `<span>${`created: "${created}"`}</span>`         || ''}
+      ${icon        && `<span>${`icon: "${icon}"`}</span>`               || ''}
+      ${preview     && `<span>${`preview: "${preview}"`}</span>`         || ''}
       ${(name || title || category || created) && '<span>---</span>'     || ''}
-      ${content && `<span></span>\n<span>${content}</span>` || ''}
+      ${content     && `<span></span>\n<span>${content}</span>`          || ''}
     `.split(/\n/).map(t => t.trim()).filter(t => t !== '').join('\n')
 
+    const html = useMemo(() => {
+      if (content) {
+        const rawHtml = marked(content)
+        return DOMPurity.sanitize(rawHtml as string)
+      }
+      return content      
+    }, [content])
+    
     return (
       <div class={cn`
         grid grid-rows-[60px_1fr] w-full h-svh
@@ -58,7 +68,6 @@ export default class AboutUsRoute extends Component {
                 `}>
                   <XIcon width={20} height={20} class='stroke-[0.5]' />
                 </div>
-                <MDXProvider>
                   <div className='relative md'>
                     <div class='flex flex-col gap-0.5 px-4 backdrop-blur-xl'>
                       <div class='flex flex-row items-center gap-2 pt-3 pb-2 text-xs font-thin'>
@@ -66,23 +75,40 @@ export default class AboutUsRoute extends Component {
                           flex flex-row items-center gap-1 px-1 w-fit bg-neutral-100/8
                           rounded-sm text-md transition-color duration-75 opacity-85
                         `}>
-                          <span class='text-neutral-50'>{name}</span>
-                          <span>·</span>
-                          <span class='text-rose-400'>{category}</span>
+                          {name && (
+                            <span class='text-neutral-50'>{name}</span>
+                          )}
+                          {(name || category) && (
+                            <span>·</span>
+                          )}
+                          {category && (
+                            <span class='text-rose-400'>{category}</span>
+                          )}
                         </div>
-                        <span class='opacity-70'>{dayjs(created).format('ll')}</span>
+                        {created && (
+                          <span class='opacity-70'>
+                            {dayjs(created).format('ll')}
+                          </span>
+                        )}
                       </div>
-                      <span class='text-2xl mb-8'>{title}</span>
+                      {title && (
+                        <span class='text-2xl mb-8'>{title}</span>
+                      )}
                     </div>
-                    <div class='px-4 font-sans font-light'>
-                      {content}
-                    </div>
+                    {html && (
+                      <div
+                        class='px-4 font-sans font-light'
+                        dangerouslySetInnerHTML={{ __html: html }}
+                      ></div>
+                    )}
                   </div>
-                </MDXProvider>
               </div>
             </div>
             <div class='flex w-full md'>
-              <pre class='!m-0 w-full !bg-transparent border border-purple-400/35' dangerouslySetInnerHTML={{ __html: html }}></pre>
+              <pre
+                class='!m-0 w-full !bg-transparent border border-purple-400/35'
+                dangerouslySetInnerHTML={{ __html: previewContent }}
+              ></pre>
             </div>
           </div>
           <div class={cn`
@@ -166,7 +192,7 @@ export default class AboutUsRoute extends Component {
                   onChange={e => setPreview(e.currentTarget.value)}
                 />
                 <textarea
-                  class='p-1 mt-3 h-[60rem] bg-neutral-700/15 outline outline-neutral-700/50 rounded-sm'
+                  class='p-1 mt-3 h-[28rem] bg-neutral-700/15 outline outline-neutral-700/50 rounded-sm'
                   onChange={e => setContent(e.currentTarget.value)}
                 />
               </div>

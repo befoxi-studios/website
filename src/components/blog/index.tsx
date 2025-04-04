@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'preact/hooks'
 import { useLocation } from 'preact-iso'
+import { useGlobal } from '@/hooks/useGlobal'
 import { fetchBlogMetadata } from '@/hooks/useBlog'
 import Header from '@/components/header'
 import Loading from '@/components/ui/Loading'
@@ -10,7 +11,7 @@ import type { Metadata } from '@/types/blog'
 
 const Blog = ({ children }: React.HTMLAttributes<HTMLElement>) => {
   const location = useLocation()
-
+  const { langCode } = useGlobal()
   const [metadata, setMetadata] = useState<(Metadata | null)[]>([])
   const [isError, setIsError] = useState(false)
   const [isPost, setIsPost] = useState(false)
@@ -37,8 +38,9 @@ const Blog = ({ children }: React.HTMLAttributes<HTMLElement>) => {
   }, [location, metadata])
 
   useEffect(() => {
-    fetchBlogMetadata().then((t) => setMetadata(t))
-  }, [fetchBlogMetadata])
+    fetchBlogMetadata(langCode)
+      .then(data => setMetadata(data))
+  }, [langCode, fetchBlogMetadata])
 
   return (<>
     {isError && (<>
