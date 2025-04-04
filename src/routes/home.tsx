@@ -33,7 +33,7 @@ export default class HomeRoute extends Component {
               text-black text-sm font-mono tracking-tight overflow-hidden select-none z-15
             `}
           >
-            <span class='sticky top-0 py-1'>
+            <span class='sticky top-0 py-1 text-center text-balance'>
               {t('alert.construction', 'This site is still under construction!')}
             </span>
           </div>

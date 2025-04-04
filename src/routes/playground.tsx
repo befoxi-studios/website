@@ -1,12 +1,15 @@
+import '@/styles/markdown.css'
+import 'highlight.js/styles/github-dark.min.css'
 import { Component } from 'preact'
-import { useMemo, useState } from 'preact/hooks'
+import { useEffect, useMemo, useState } from 'preact/hooks'
 import { XIcon } from 'lucide-preact'
 import { marked } from 'marked'
 import DOMPurity from 'dompurify'
+import hljs from 'highlight.js'
 import { cn } from '@/utils/cn'
 import Loading from '@/components/ui/Loading'
 import Header from '@/components/header'
-
+import { MDXProvider } from '@mdx-js/preact'
 
 export default class AboutUsRoute extends Component {
   name = 'Playground'
@@ -45,6 +48,10 @@ export default class AboutUsRoute extends Component {
       }
       return content      
     }, [content])
+    
+    useEffect(() => {
+      hljs.highlightAll()
+    }, [html])
     
     return (
       <div class={cn`
@@ -96,10 +103,12 @@ export default class AboutUsRoute extends Component {
                       )}
                     </div>
                     {html && (
-                      <div
-                        class='px-4 font-sans font-light'
-                        dangerouslySetInnerHTML={{ __html: html }}
-                      ></div>
+                      <MDXProvider>
+                        <div
+                          class='px-4 font-sans font-light'
+                          dangerouslySetInnerHTML={{ __html: html }}
+                        ></div>
+                      </MDXProvider>
                     )}
                   </div>
               </div>
