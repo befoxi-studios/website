@@ -24,7 +24,7 @@ const SearchIndex = (result: SearchModule | undefined): React.ReactElement => {
       >
         <div class='flex flex-row items-start gap-2'>
           <div class={cn`
-            flex items-center justify-center px-1 py-0.5 my-auto mt-0.6
+            flex items-center justify-center px-1 py-0.5 mb-auto mt-0.6
             bg-neutral-700/45 text-neutral-400 rounded-sm
           `}>
             <span class='text-base sm:text-xs text-light lowercase'>

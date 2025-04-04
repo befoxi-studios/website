@@ -1,20 +1,5 @@
 import type { MDXComponents, MDXContent } from '@/types/mdx'
 
-export type v1 = {
-  version: number
-  file: {
-    structure: string
-    index: string
-  }
-  readme?: {
-    filename: string
-    visible: boolean
-    [code: string]: {
-      filename: string
-    }
-  }
-}
-
 export type ModuleType = {
   content?: React.SetStateAction<MDXContent>
   variables?: MetadataVariable

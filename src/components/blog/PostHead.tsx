@@ -45,7 +45,7 @@ const PostHead = ({ meta, delay, className }: PostHeadProps) => {
         style={{ opacity: loaded ? 1 : 0 }}
         onClick={() => location.route(`/blog/${meta.name}`, true)}
       >
-        <div class='flex flex-col justify-center p-3 w-full'>
+        <div class='flex flex-col justify-start p-3 w-full overflow-hidden'>
           {meta.variables.name && (
             <div class={cn`
               flex flex-row items-center gap-1 px-1 mb-2.5 w-fit
@@ -56,7 +56,7 @@ const PostHead = ({ meta, delay, className }: PostHeadProps) => {
                   src={meta.variables.icon}
                   width={16}
                   height={16}
-                  class='w-4 h-4 rounded-sm pixelate'
+                  class='w-4 min-w-4 h-4 rounded-sm bg-cover pixelate'
                   onLoad={() => setIconLoaded(true)}
                   onError={() => setIconError(true)}
                 />
@@ -65,18 +65,18 @@ const PostHead = ({ meta, delay, className }: PostHeadProps) => {
             </div>
           )}
           {meta.variables.title && (
-            <span class='mb-1 text-xl font-semibold'>{meta.variables.title}</span>
+            <span class='mb-1 text-xl font-semibold truncate'>{meta.variables.title}</span>
           )}
           {meta.variables.description && (
             <span class='mb-1 max-h-[48px] text-md overflow-hidden'>{meta.variables.description}</span>
           )}
           {timeDisplay && (
-            <span class='text-sm font-extralight'>{timeDisplay}</span>
+            <span class='text-sm font-extralight whitespace-nowrap'>{timeDisplay}</span>
           )}
         </div>
         {meta.variables.preview && !previewError && (
           <div
-            class='hidden sm:flex items-start justify-center p-3 w-min h-full'
+            class='hidden min-[426px]:flex items-start justify-center p-3 w-min h-full'
             style={{ minWidth: meta.variables.description ? '208px' : '139px' }}
           >
             <img

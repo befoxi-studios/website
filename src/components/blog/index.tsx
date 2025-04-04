@@ -52,7 +52,7 @@ const Blog = ({ children }: React.HTMLAttributes<HTMLElement>) => {
     )}
     {children || (
       <div class='flex justify-center flex-wrap overflow-auto'>
-        <div class='flex flex-col gap-4 min-w-screen sm:min-w-2xl max-w-3xl p-4'>
+        <div class='flex flex-col gap-4 min-w-screen min-[672px]:min-w-2xl max-w-3xl p-4'>
           {metadata.sort((a, b) => {
             const bTime = dayjs(b?.variables?.created)
             const isBeforeB = bTime.isBefore(dayjs(a?.variables?.created))

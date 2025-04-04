@@ -1,5 +1,5 @@
-import { FILES_OF_BLOG, FILES_OF_BLOG_README, FILES_OF_BLOG_CONFIG } from '@/utils/files'
-import type { v1, Metadata, MetadataVariable } from '@/types/blog'
+import { FILES_OF_BLOG, FILES_OF_BLOG_README } from '@/utils/files'
+import type { Metadata, MetadataVariable } from '@/types/blog'
 
 const throwDoesNotExistError = () => {
   return new Error('The file cannot be found or does not exist.')
@@ -17,23 +17,8 @@ const getModule = async (fileModule: () => Promise<unknown>) => {
   }
 }
 
-const getConfig = async () => {
-  const selectedConfig = FILES_OF_BLOG_CONFIG[`../submodules/blog/.conf.toml`]
-
-  if (selectedConfig) {
-    const module = await selectedConfig()
-    // @ts-ignore
-    // module contains `default` method,
-    // type definition not possible
-    const { default: cfg } = module
-    return cfg
-  }
-  throw throwDoesNotExistError()
-}
-
 export const getPost = async (uri: string, countryCode?: string) => {
-  const { file: { index } }: v1 = await getConfig()
-  const indexFileRegex = new RegExp(`\.{2}\/submodules${uri}\/${index}.mdx?`)
+  const indexFileRegex = new RegExp(`\.{2}\/submodules${uri}\/index.mdx?`)
   const internalFileRegex = new RegExp(`\.{2}\/submodules${uri}\/${countryCode}.mdx?`)
 
   const filePath = Object.keys(FILES_OF_BLOG).find(t => {
@@ -58,8 +43,7 @@ export const getPost = async (uri: string, countryCode?: string) => {
 }
 
 export const getAllDir = async () => {
-  const { file: { index } }: v1 = await getConfig()
-  const fileRegex = new RegExp(`^((\.{2}\/submodules\/blog\/)([a-zA-Z0-9_-]+)\/)(${index}(\.mdx?))$`)
+  const fileRegex = new RegExp(`^((\.{2}\/submodules\/blog\/)([a-zA-Z0-9_-]+)\/)(index(\.mdx?))$`)
   const indexedFiles = Object.keys(FILES_OF_BLOG).filter(path => fileRegex.test(path))
   const selectedFiles: { [key: string]: Promise<any> } = {}
 
