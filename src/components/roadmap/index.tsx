@@ -1,41 +1,50 @@
 import { useEffect, useState } from 'preact/hooks'
-import { ReceiptTextIcon } from 'lucide-preact'
+import { v5 as uuidv5 } from 'uuid'
 import { cn } from '@/utils/cn'
 import RoadmapTab from '@/components/roadmap/RoadmapTab'
 import RoadmapTable from '@/components/roadmap/RoadmapTable'
 import RoadmapContent from '@/components/roadmap/RoadmapContent'
-import roadmapItems from '@mod/roadmap/set/items'
-import type { RoadmapItem } from '@mod/roadmap/set/type'
+import roadmapItems from '@/submodules/roadmap/src/items'
+import type { RoadmapItem } from '@/submodules/roadmap/src/type'
 
 const Roadmap = () => {
-  const [items] = useState(roadmapItems.filter(t => t))
-  const [currentTab, setCurrentTab] = useState<string>(roadmapItems.find(t => t)?.name!)
+  const [rawItems] = useState(roadmapItems.filter(t => t))
+  const [currentTab, setCurrentTab] = useState<string>()
   const [currentItem, setCurrentItem] = useState<RoadmapItem>()
   
   const changeTab = (newTab: string) => {
     setCurrentTab('')
-    setTimeout(() => setCurrentTab(newTab), 75)
+    setTimeout(() => setCurrentTab(newTab), 125)
   }
 
   useEffect(() => {
-    if (items) {
-      setCurrentItem(items.find(t => t.name === currentTab))
+    if (rawItems.length) {
+      const id = uuidv5(roadmapItems[0].filename, uuidv5.URL)
+      setCurrentTab(id)
     }
-  }, [currentTab, items])
+  }, [rawItems])
 
-  return (
-    <div class={cn`
-      m-4 mt-0 h-[calc(100svh-60px-(var(--spacing)*4))]
-      bg-neutral-700/5 border border-neutral-500/15 rounded-md
-    `}>
-      <div class='flex flex-col h-full select-none'>
-        {items.length > 0 ? (<>
+  useEffect(() => {
+    if (rawItems) {
+      const item = rawItems.find(t => uuidv5(t.filename, uuidv5.URL) === currentTab)?.data
+      setCurrentItem(item)
+    }
+  }, [currentTab, rawItems])
+
+  if (rawItems.length) {
+    return (
+      <div class={cn`
+        m-4 mt-0 h-[calc(100svh-60px-(var(--spacing)*4))]
+        bg-neutral-700/5 border border-neutral-500/15 rounded-md
+      `}>
+        <div class='flex flex-col h-full select-none'>
           <div class='flex flex-col min-[32rem]:flex-row items-start border-b border-b-neutral-500/15'>
-            {items.filter(t => t).map(({ name, icon }, index) => (
+            {rawItems.filter(t => t).map(({ filename, data: { name, icon }}, index) => (
               <RoadmapTab
                 tabIndex={index}
+                tabId={uuidv5(filename, uuidv5.URL)}
+                currentTabId={currentTab!}
                 tabName={name}
-                currentTabName={currentTab}
                 tabIconSrc={icon}
                 tabChanged={changeTab}
               />
@@ -57,16 +66,10 @@ const Roadmap = () => {
               <RoadmapContent />
             </>)}
           </div>
-        </>) : (
-          <div class='flex items-center justify-center h-full'>
-            <span class='text-mono font-light animate-pulse'>
-              <ReceiptTextIcon class='opacity-50' />
-            </span>
-          </div>
-        )}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default Roadmap

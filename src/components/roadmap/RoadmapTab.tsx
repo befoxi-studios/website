@@ -1,7 +1,7 @@
 import { cn } from '@/utils/cn'
 import type { RoadmapTabProps } from '@/types/roadmap'
 
-const RoadmapTab = ({ tabIndex, tabName, currentTabName, tabIconSrc, tabChanged }: RoadmapTabProps) => {
+const RoadmapTab = ({ tabIndex, tabId, currentTabId, tabName, tabIconSrc, tabChanged }: RoadmapTabProps) => {
   return (
     <button
       key={tabIndex}
@@ -9,7 +9,7 @@ const RoadmapTab = ({ tabIndex, tabName, currentTabName, tabIconSrc, tabChanged 
         flex items-center p-1 m-1 not-last:mr-0 bg-neutral-200/20
         rounded-sm outline-0 cursor-pointer transition-colors duration-75
       `}
-      style={tabName === currentTabName ? {
+      style={tabId === currentTabId ? {
         backgroundColor: 'color-mix(in oklab, var(--color-neutral-200) 10%, transparent)',
         opacity: 1,
         pointerEvents: 'none',
@@ -18,7 +18,7 @@ const RoadmapTab = ({ tabIndex, tabName, currentTabName, tabIconSrc, tabChanged 
         opacity: 0.75,
         pointerEvents: 'auto',
       }}
-      onClick={() => tabChanged(tabName)}
+      onClick={() => tabChanged(tabId)}
     >
       {tabIconSrc && (
         <img

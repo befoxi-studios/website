@@ -1,4 +1,4 @@
-import type { RoadmapListItem, RoadmapTableItem } from '@mod/roadmap/set/type'
+import type { RoadmapListItem, RoadmapTableItem } from '@mod/roadmap/src/type'
 
 export interface RoadmapListProps {
   tableBaseColor: string
@@ -7,8 +7,9 @@ export interface RoadmapListProps {
 
 export interface RoadmapTabProps {
   tabIndex: number
+  tabId: string
+  currentTabId: string
   tabName: string
-  currentTabName: string
   tabIconSrc?: string
   tabChanged: (newTab: string) => any
 }
