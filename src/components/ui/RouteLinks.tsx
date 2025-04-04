@@ -22,8 +22,8 @@ const RouteLinks = ({ className, exclude }: React.HTMLAttributes<HTMLElement> & 
   const excludeReference = (defineReference: DefineReference | undefined) => {
     if (defineReference) {
       if (exclude && defineReference.name) {
-        const name = defineReference.name?.toLowerCase()
-        return !exclude.filter(e => e.toLowerCase() === name)[0]
+        const name = defineReference.name?.toLowerCase().replace(/-/g, ' ')
+        return !exclude.filter(e => e.toLowerCase().replace(/-/g, ' ') === name)[0]
       }
     }
     return defineReference

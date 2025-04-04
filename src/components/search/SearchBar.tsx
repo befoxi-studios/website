@@ -1,10 +1,11 @@
+import { HTMLAttributes } from 'preact/compat'
 import { useEffect } from 'preact/hooks'
 import { SearchIcon } from 'lucide-preact'
 import { useGlobal } from '@/hooks/useGlobal'
 import { cn } from '@/utils/cn'
 import { useI18n } from '@/hooks/useI18n'
 
-const SearchBar = () => {
+const SearchBar = ({ className }: HTMLAttributes<HTMLDivElement>) => {
   const { isSearchOpen, changeSearchState } = useGlobal()
   const { t } = useI18n()
 
@@ -24,8 +25,9 @@ const SearchBar = () => {
   return (
     <div
       class={cn`
-        relative bg-neutral-50/5 text-neutral-50/45 hover:text-neutral-50/70
+        relative w-64 bg-neutral-900/95 text-neutral-50/45 hover:text-neutral-50/70
         border border-neutral-50/3 rounded-md transition-all duration-425
+        ${className}
       `}
       style={{
         opacity: isSearchOpen ? 0.6 : 1

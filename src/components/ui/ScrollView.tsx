@@ -75,7 +75,8 @@ const ScrollView = ({ max = 100, page = 5, indicator, onScrollChange, children }
           key={index}
           className={cn`
             col-start-1 row-start-2 last:row-end-4 flex justify-center
-            h-[calc(100dvh-(60px*2))] last:h-[calc(100dvh-60px)] transition-[transform] duration-500
+            h-[calc(100dvh-(60px*2))] last:h-[calc(100dvh-60px)]
+            transition-[transform] duration-500
             ${props.className}
           `}
           style={{ transform: `translateY(${dragReaction(index, 7)}dvh)` }}

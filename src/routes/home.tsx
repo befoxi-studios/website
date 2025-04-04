@@ -53,7 +53,7 @@ export default class HomeRoute extends Component {
           )}
           onScrollChange={setScrollProgress}
         >
-          <SectionWrapper className='items-center'>
+          <SectionWrapper className='w-dvw items-center'>
             <div class='mx-12 w-full sm:w-lg max-w-none sm:max-w-lg lg:max-w-3xl text-center'>
               <div class='flex flex-col items-center justify-center gap-[1.75rem] font-light'>
                 <span
